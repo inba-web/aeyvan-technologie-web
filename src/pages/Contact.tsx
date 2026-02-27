@@ -253,49 +253,50 @@ const Contact = () => {
             {/* Side Info Cards */}
             <div className="lg:col-span-12 xl:col-span-4 space-y-8">
               <SectionReveal delay={0.1}>
-                <div className="bg-[#111111] border border-white/5 rounded-[2.5rem] p-10 space-y-10">
+                <div className="bg-[#111111] border border-white/5 rounded-[2.5rem] p-6 
+                sm:p-10 space-y-8 sm:space-y-10">
                   <h3 className="text-2xl font-black text-white tracking-tight flex items-center gap-3">
                     Contact <span className="text-primary italic font-light">Details</span>
                   </h3>
 
                   <div className="space-y-8">
-                    <div className="group flex items-start gap-4 md:gap-6 min-w-0">
-                      <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary flex-shrink-0 group-hover:bg-primary group-hover:text-black transition-all duration-300">
-                        <MapPin size={20} className="md:w-6 md:h-6" />
+                    <div className="group flex items-center gap-3 sm:gap-4 md:gap-6 min-w-0">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary flex-shrink-0 group-hover:bg-primary group-hover:text-black transition-all duration-300">
+                        <MapPin size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 mb-1">Global HQ</p>
-                        <p className="text-sm md:text-base text-white/80 leading-relaxed font-light">{COMPANY.location1}, {COMPANY.location2}</p>
+                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 mb-0.5">Global HQ</p>
+                        <p className="text-sm sm:text-base text-white/80 leading-tight font-light">{COMPANY.location1}, {COMPANY.location2}</p>
                       </div>
                     </div>
 
-                    <div className="group flex items-start gap-4 md:gap-6 min-w-0">
-                      <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary flex-shrink-0 group-hover:bg-primary group-hover:text-black transition-all duration-300">
-                        <Phone size={20} className="md:w-6 md:h-6" />
+                    <div className="group flex items-center gap-3 sm:gap-4 md:gap-6 min-w-0">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary flex-shrink-0 group-hover:bg-primary group-hover:text-black transition-all duration-300">
+                        <Phone size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 mb-1">Direct Line</p>
-                        <a href={`tel:${COMPANY.phone.replace(/\s+/g, '')}`} className="text-lg md:text-xl font-bold text-white hover:text-primary transition-colors break-all md:break-normal">{COMPANY.phone}</a>
+                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 mb-0.5">Direct Line</p>
+                        <a href={`tel:${COMPANY.phone.replace(/\s+/g, '')}`} className="text-base sm:text-lg md:text-xl font-bold text-white hover:text-primary transition-colors block">{COMPANY.phone}</a>
                       </div>
                     </div>
 
-                    <div className="group flex items-start gap-4 md:gap-6 min-w-0">
-                      <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary flex-shrink-0 group-hover:bg-primary group-hover:text-black transition-all duration-300">
-                        <Mail size={20} className="md:w-6 md:h-6" />
+                    <div className="group flex items-center gap-3 sm:gap-4 md:gap-6 min-w-0">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary flex-shrink-0 group-hover:bg-primary group-hover:text-black transition-all duration-300">
+                        <Mail size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 mb-1">Email Us</p>
-                        <a href={`mailto:${COMPANY.email}`} className="text-base md:text-lg font-medium text-white hover:text-primary transition-colors break-all md:break-normal">{COMPANY.email}</a>
+                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 mb-0.5">Email Us</p>
+                        <a href={`mailto:${COMPANY.email}`} className="text-[13px] sm:text-base md:text-xl font-medium text-white hover:text-primary transition-colors break-all whitespace-normal">{COMPANY.email}</a>
                       </div>
                     </div>
 
-                    <div className="group flex items-start gap-4 md:gap-6 min-w-0">
-                      <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary flex-shrink-0 group-hover:bg-primary group-hover:text-black transition-all duration-300">
-                        <Clock size={20} className="md:w-6 md:h-6" />
+                    <div className="group flex items-center gap-3 sm:gap-4 md:gap-6 min-w-0">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary flex-shrink-0 group-hover:bg-primary group-hover:text-black transition-all duration-300">
+                        <Clock size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 mb-1">Service Hours</p>
-                        <p className="text-sm md:text-base text-white/80 font-light">{COMPANY.workingHours}</p>
+                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 mb-0.5">Service Hours</p>
+                        <p className="text-sm sm:text-base text-white/80 font-light leading-tight">{COMPANY.workingHours}</p>
                       </div>
                     </div>
                   </div>
