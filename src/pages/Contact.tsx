@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Send, MapPin, Phone, Mail, Clock } from "lucide-react";
+import { Send, MapPin, Phone, Mail, Clock, ArrowRight, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import SectionReveal from "@/components/SectionReveal";
 import { COMPANY } from "@/lib/constants";
@@ -14,19 +14,10 @@ const contactSchema = z.object({
   phone: z.string().trim().min(10, "Enter a valid phone number").max(20),
   company: z.string().trim().max(100).optional(),
   service: z.string().min(1, "Select a service"),
-  budget: z.string().min(1, "Select a budget range"),
   message: z.string().trim().min(10, "Message must be at least 10 characters").max(2000),
 });
 
 type ContactForm = z.infer<typeof contactSchema>;
-
-const BUDGET_RANGES = [
-  "Under ₹1 Lakh",
-  "₹1 - 5 Lakhs",
-  "₹5 - 15 Lakhs",
-  "₹15 - 50 Lakhs",
-  "₹50 Lakhs+",
-];
 
 const SERVICE_OPTIONS = [
   "Custom Web Development",
@@ -37,9 +28,35 @@ const SERVICE_OPTIONS = [
   "Other",
 ];
 
+const CAROUSEL_IMAGES = [
+  {
+    url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2000&auto=format&fit=crop",
+    title: "Expert Consulting",
+    subtitle: "Strategic solutions for your business"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2000&auto=format&fit=crop",
+    title: "Modern Innovation",
+    subtitle: "Cutting-edge technology at your fingertips"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2000&auto=format&fit=crop",
+    title: "Global Support",
+    subtitle: "We're here for you, wherever you are"
+  }
+];
+
 const Contact = () => {
   const { toast } = useToast();
   const [submitting, setSubmitting] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % CAROUSEL_IMAGES.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
 
   const {
     register,
@@ -52,189 +69,280 @@ const Contact = () => {
 
   const onSubmit = async (data: ContactForm) => {
     setSubmitting(true);
-    // Simulate submission (would connect to a backend)
-    await new Promise((r) => setTimeout(r, 1500));
-    toast({
-      title: "Message Sent!",
-      description: "We'll get back to you within 24 hours.",
-    });
-    reset();
-    setSubmitting(false);
+    try {
+      // Construction of professional email content
+      const subject = encodeURIComponent(`Zently IT Inquiry: ${data.service} from ${data.name}`);
+      const body = encodeURIComponent(
+        `Hello Zently Team,\n\n` +
+        `You have a new inquiry from the website contact form:\n\n` +
+        `--------------------------------------------------\n` +
+        `NAME: ${data.name}\n` +
+        `EMAIL: ${data.email}\n` +
+        `PHONE: ${data.phone}\n` +
+        `SERVICE: ${data.service}\n` +
+        `--------------------------------------------------\n\n` +
+        `MESSAGE:\n${data.message}\n\n` +
+        `Regards,\n${data.name}`
+      );
+
+      // Simulation delay for professional feel
+      await new Promise((r) => setTimeout(r, 1200));
+
+      // Triggering the direct email to md.inbavarunan.zentlyitsolution@gmail.com
+      const mailtoUrl = `mailto:md.inbavarunan.zentlyitsolution@gmail.com?subject=${subject}&body=${body}`;
+      window.location.href = mailtoUrl;
+
+      toast({
+        title: "Opening Email Client...",
+        description: "Your message has been prepared for md.inbavarunan.zentlyitsolution@gmail.com",
+      });
+
+      reset();
+    } catch (error) {
+      toast({
+        title: "Action Required",
+        description: "We couldn't open your email client. Please email us directly.",
+        variant: "destructive"
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
-    <div className="overflow-hidden">
-      {/* Hero */}
-      <section className="section-padding pt-32 md:pt-40 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent" />
-        <div className="container mx-auto text-center relative z-10">
-          <motion.span
-            className="inline-block text-sm text-primary font-medium uppercase tracking-wider mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+    <div className="overflow-hidden bg-background min-h-screen">
+      {/* Full Screen Carousel Hero */}
+      <section className="relative h-[70vh] md:h-[80vh] flex items-center justify-center overflow-hidden">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentSlide}
+            className="absolute inset-0 z-0"
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
           >
-            Contact Us
-          </motion.span>
-          <motion.h1
-            className="font-display text-4xl md:text-6xl font-bold mb-6"
-            initial={{ opacity: 0, y: 20 }}
+            <div className="absolute inset-0 bg-black/60 z-10" />
+            <img
+              src={CAROUSEL_IMAGES[currentSlide].url}
+              alt="Carousel"
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+        </AnimatePresence>
+
+        <div className="container mx-auto px-4 relative z-20 text-center">
+          <motion.div
+            key={`content-${currentSlide}`}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Let's Build Something <span className="gradient-text">Great Together</span>
-          </motion.h1>
+            <span className="inline-block text-sm text-primary font-bold uppercase tracking-[0.4em] mb-6 bg-primary/10 backdrop-blur-md px-6 py-2 rounded-full border border-primary/20">
+              {CAROUSEL_IMAGES[currentSlide].subtitle}
+            </span>
+            <h1 className="font-display text-5xl md:text-8xl font-black mb-8 tracking-tighter text-white leading-none">
+              {CAROUSEL_IMAGES[currentSlide].title.split(" ")[0]} <br />
+              <span className="gradient-text">{CAROUSEL_IMAGES[currentSlide].title.split(" ").slice(1).join(" ")}</span>
+            </h1>
+          </motion.div>
+        </div>
+
+        {/* Carousel Indicators */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex gap-4">
+          {CAROUSEL_IMAGES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentSlide(i)}
+              className={`w-12 h-1 rounded-full transition-all duration-500 ${i === currentSlide ? "bg-primary w-20" : "bg-white/30 hover:bg-white/50"
+                }`}
+            />
+          ))}
         </div>
       </section>
 
-      <section className="section-padding pt-0">
+      <section className="section-padding relative -mt-6 z-40">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             {/* Form */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-12 xl:col-span-8">
               <SectionReveal>
-                <form onSubmit={handleSubmit(onSubmit)} className="glass rounded-xl p-8 md:p-12 space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Full Name *</label>
-                      <input
-                        {...register("name")}
-                        className="w-full px-4 py-3 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
-                        placeholder="Your name"
-                      />
-                      {errors.name && <p className="text-destructive text-xs mt-1">{errors.name.message}</p>}
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Email *</label>
-                      <input
-                        {...register("email")}
-                        type="email"
-                        className="w-full px-4 py-3 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
-                        placeholder="your@email.com"
-                      />
-                      {errors.email && <p className="text-destructive text-xs mt-1">{errors.email.message}</p>}
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Phone *</label>
-                      <input
-                        {...register("phone")}
-                        className="w-full px-4 py-3 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
-                        placeholder="+91 XXXXX XXXXX"
-                      />
-                      {errors.phone && <p className="text-destructive text-xs mt-1">{errors.phone.message}</p>}
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Company</label>
-                      <input
-                        {...register("company")}
-                        className="w-full px-4 py-3 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
-                        placeholder="Company name"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Service Interested In *</label>
-                      <select
-                        {...register("service")}
-                        className="w-full px-4 py-3 rounded-lg bg-muted border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
-                        defaultValue=""
-                      >
-                        <option value="" disabled>Select a service</option>
-                        {SERVICE_OPTIONS.map((s) => (
-                          <option key={s} value={s}>{s}</option>
-                        ))}
-                      </select>
-                      {errors.service && <p className="text-destructive text-xs mt-1">{errors.service.message}</p>}
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Message *</label>
-                    <textarea
-                      {...register("message")}
-                      rows={5}
-                      className="w-full px-4 py-3 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none"
-                      placeholder="Tell us about your project..."
-                    />
-                    {errors.message && <p className="text-destructive text-xs mt-1">{errors.message.message}</p>}
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-10 py-4 rounded-lg bg-primary text-primary-foreground font-semibold text-lg hover:opacity-90 transition-all glow disabled:opacity-50"
+                <div className="relative">
+                  <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="relative bg-[#0A0A0A] border border-white/10 rounded-[2.5rem] p-8 md:p-16 space-y-10 shadow-2xl"
                   >
-                    {submitting ? "Sending..." : "Send Message"}
-                    <Send size={18} />
-                  </button>
-                </form>
+                    <div className="mb-12">
+                      <h2 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tight">Ready to Start?</h2>
+                      <p className="text-white/50 font-light">Fill out the form below and we'll analyze your requirements.</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                      <div className="space-y-3">
+                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 ml-1">Full Name</label>
+                        <input
+                          {...register("name")}
+                          className="w-full px-6 py-5 rounded-2xl bg-white/5 border border-white/10 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all text-lg"
+                          placeholder="John Doe"
+                        />
+                        {errors.name && <p className="text-destructive text-xs font-bold">{errors.name.message}</p>}
+                      </div>
+                      <div className="space-y-3">
+                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 ml-1">Email Address</label>
+                        <input
+                          {...register("email")}
+                          type="email"
+                          className="w-full px-6 py-5 rounded-2xl bg-white/5 border border-white/10 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all text-lg"
+                          placeholder="john@example.com"
+                        />
+                        {errors.email && <p className="text-destructive text-xs font-bold">{errors.email.message}</p>}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                      <div className="space-y-3">
+                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 ml-1">Phone Number</label>
+                        <input
+                          {...register("phone")}
+                          className="w-full px-6 py-5 rounded-2xl bg-white/5 border border-white/10 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all text-lg"
+                          placeholder="+91 XXXXX XXXXX"
+                        />
+                        {errors.phone && <p className="text-destructive text-xs font-bold">{errors.phone.message}</p>}
+                      </div>
+                      <div className="space-y-3">
+                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 ml-1">Service Interested In</label>
+                        <select
+                          {...register("service")}
+                          className="w-full px-6 py-5 rounded-2xl bg-[#111111] border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-primary/50 appearance-none transition-all text-lg cursor-pointer"
+                          defaultValue=""
+                        >
+                          <option value="" disabled className="bg-[#111111]">Select a service</option>
+                          {SERVICE_OPTIONS.map((s) => (
+                            <option key={s} value={s} className="bg-[#111111]">{s}</option>
+                          ))}
+                        </select>
+                        {errors.service && <p className="text-destructive text-xs font-bold">{errors.service.message}</p>}
+                      </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      <label className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 ml-1">Message Details</label>
+                      <textarea
+                        {...register("message")}
+                        rows={6}
+                        className="w-full px-6 py-5 rounded-2xl bg-white/5 border border-white/10 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none transition-all text-lg"
+                        placeholder="Describe your vision, goals, and any specific requirements..."
+                      />
+                      {errors.message && <p className="text-destructive text-xs font-bold">{errors.message.message}</p>}
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className="group relative w-full md:w-auto inline-flex items-center justify-center gap-4 px-12 py-6 rounded-2xl bg-primary text-black font-black text-xl hover:scale-[1.02] transition-all shadow-[0_20px_40px_rgba(249,115,22,0.3)] disabled:opacity-50 disabled:scale-100 overflow-hidden"
+                    >
+                      <span className="relative z-10">{submitting ? "Processing..." : "Submit Inquiry"}</span>
+                      <ArrowRight size={24} className={`relative z-10 transition-transform duration-300 ${submitting ? "translate-x-12 opacity-0" : "group-hover:translate-x-2"}`} />
+                      <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+                    </button>
+
+                    <p className="text-[10px] text-white/20 uppercase font-bold tracking-[0.3em] text-center md:text-left">
+                      By submitting, you agree to our privacy policy and terms of service.
+                    </p>
+                  </form>
+                </div>
               </SectionReveal>
             </div>
 
-            {/* Info */}
-            <div className="space-y-6">
+            {/* Side Info Cards */}
+            <div className="lg:col-span-12 xl:col-span-4 space-y-8">
               <SectionReveal delay={0.1}>
-                <div className="glass rounded-xl p-8 space-y-6">
-                  <h3 className="font-display text-xl font-bold">Get in Touch</h3>
+                <div className="bg-[#111111] border border-white/5 rounded-[2.5rem] p-10 space-y-10">
+                  <h3 className="text-2xl font-black text-white tracking-tight flex items-center gap-3">
+                    Contact <span className="text-primary italic font-light">Details</span>
+                  </h3>
 
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
-                      <MapPin size={18} />
+                  <div className="space-y-8">
+                    <div className="group flex items-start gap-6">
+                      <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary flex-shrink-0 group-hover:bg-primary group-hover:text-black transition-all duration-300">
+                        <MapPin size={24} />
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 mb-1">Global HQ</p>
+                        <p className="text-white/80 leading-relaxed font-light">{COMPANY.location1}, {COMPANY.location2}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="font-medium text-sm">Location</p>
-                      <p className="text-sm text-muted-foreground">{COMPANY.location}</p>
-                    </div>
-                  </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
-                      <Phone size={18} />
+                    <div className="group flex items-start gap-6">
+                      <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary flex-shrink-0 group-hover:bg-primary group-hover:text-black transition-all duration-300">
+                        <Phone size={24} />
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 mb-1">Direct Line</p>
+                        <a href={`tel:${COMPANY.phone.replace(/\s+/g, '')}`} className="text-xl font-bold text-white hover:text-primary transition-colors">{COMPANY.phone}</a>
+                      </div>
                     </div>
-                    <div>
-                      <p className="font-medium text-sm">Phone</p>
-                      <a href={`tel:${COMPANY.phone}`} className="text-sm text-primary hover:underline">{COMPANY.phone}</a>
-                    </div>
-                  </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
-                      <Mail size={18} />
+                    <div className="group flex items-start gap-6">
+                      <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary flex-shrink-0 group-hover:bg-primary group-hover:text-black transition-all duration-300">
+                        <Mail size={24} />
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 mb-1">Email Us</p>
+                        <a href={`mailto:${COMPANY.email}`} className="text-lg font-medium text-white hover:text-primary transition-colors">{COMPANY.email}</a>
+                      </div>
                     </div>
-                    <div>
-                      <p className="font-medium text-sm">Email</p>
-                      <a href={`mailto:${COMPANY.email}`} className="text-sm text-primary hover:underline">{COMPANY.email}</a>
-                    </div>
-                  </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
-                      <Clock size={18} />
-                    </div>
-                    <div>
-                      <p className="font-medium text-sm">Working Hours</p>
-                      <p className="text-sm text-muted-foreground">{COMPANY.workingHours}</p>
+                    <div className="group flex items-start gap-6">
+                      <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary flex-shrink-0 group-hover:bg-primary group-hover:text-black transition-all duration-300">
+                        <Clock size={24} />
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 mb-1">Service Hours</p>
+                        <p className="text-white/80 font-light">{COMPANY.workingHours}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </SectionReveal>
 
               <SectionReveal delay={0.2}>
-                <div className="glass rounded-xl overflow-hidden">
+                <div className="relative group overflow-hidden rounded-[2.5rem] border border-white/10 shadow-2xl h-80">
                   <iframe
                     src={COMPANY.mapEmbed}
                     width="100%"
-                    height="250"
+                    height="100%"
                     style={{ border: 0 }}
                     allowFullScreen
                     loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
                     title="Zently IT Solution Location"
                   />
+                  <div className="absolute inset-0 bg-primary/5 pointer-events-none mix-blend-color" />
+                </div>
+              </SectionReveal>
+
+              <SectionReveal delay={0.3}>
+                <div className="bg-primary p-10 rounded-[2.5rem] text-black">
+                  <div className="flex items-center gap-3 mb-6">
+                    <CheckCircle2 size={32} />
+                    <h3 className="text-2xl font-black tracking-tight">Rapid Response</h3>
+                  </div>
+                  <p className="font-bold leading-relaxed mb-8 opacity-80">
+                    Our typical response time is under 120 minutes during business hours. We value your time as much as you do.
+                  </p>
+                  <div className="flex -space-x-3 overflow-hidden">
+                    {[1, 2, 3, 4].map((i) => (
+                      <img
+                        key={i}
+                        className="inline-block h-10 w-10 rounded-full ring-2 ring-primary bg-[#111111]"
+                        src={`https://i.pravatar.cc/100?img=${i + 10}`}
+                        alt="Expert"
+                      />
+                    ))}
+                    <div className="flex items-center justify-center h-10 w-10 rounded-full ring-2 ring-primary bg-black text-[10px] font-black text-primary">
+                      +12
+                    </div>
+                  </div>
                 </div>
               </SectionReveal>
             </div>

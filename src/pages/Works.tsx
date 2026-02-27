@@ -18,8 +18,8 @@ const Works = () => {
       <section className="section-padding pt-32 md:pt-48 relative overflow-hidden h-[60vh] flex items-center justify-center">
         {/* Background Image Container */}
         <div className="absolute inset-0 z-0">
-          <img
-            src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000&auto=format&fit=crop"
+          <img 
+            src="https://cdn.nbyula.com/public/community/6274d05454121f0014506c51/bannerImage/1651822819784-6274d05454121f0014506c51.jpeg"
             alt="Professional Office"
             className="w-full h-full object-cover opacity-20 transition-opacity duration-1000"
           />

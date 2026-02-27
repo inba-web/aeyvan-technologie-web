@@ -34,7 +34,7 @@ const Services = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Our Ecosystem
+            Our Services
           </motion.span>
           <motion.h1
             className="font-display text-5xl md:text-8xl font-black mb-8 tracking-tighter text-white leading-none"
