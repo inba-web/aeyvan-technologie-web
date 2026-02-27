@@ -1,16 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import emailjs from "@emailjs/browser";
 import { Send, MapPin, Phone, Mail, Clock, ArrowRight, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import SectionReveal from "@/components/SectionReveal";
 import { COMPANY } from "@/lib/constants";
 
 const contactSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100),
-  email: z.string().trim().email("Invalid email").max(255),
+  user_name: z.string().trim().min(1, "Name is required").max(100),
+  user_email: z.string().trim().email("Invalid email").max(255),
   phone: z.string().trim().min(10, "Enter a valid phone number").max(20),
   company: z.string().trim().max(100).optional(),
   service: z.string().min(1, "Select a service"),
@@ -50,6 +51,7 @@ const Contact = () => {
   const { toast } = useToast();
   const [submitting, setSubmitting] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const form = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -67,41 +69,29 @@ const Contact = () => {
     resolver: zodResolver(contactSchema),
   });
 
-  const onSubmit = async (data: ContactForm) => {
+  const onSubmit = async () => {
+    if (!form.current) return;
+
     setSubmitting(true);
     try {
-      // Construction of professional email content
-      const subject = encodeURIComponent(`Zently IT Inquiry: ${data.service} from ${data.name}`);
-      const body = encodeURIComponent(
-        `Hello Zently Team,\n\n` +
-        `You have a new inquiry from the website contact form:\n\n` +
-        `--------------------------------------------------\n` +
-        `NAME: ${data.name}\n` +
-        `EMAIL: ${data.email}\n` +
-        `PHONE: ${data.phone}\n` +
-        `SERVICE: ${data.service}\n` +
-        `--------------------------------------------------\n\n` +
-        `MESSAGE:\n${data.message}\n\n` +
-        `Regards,\n${data.name}`
+      await emailjs.sendForm(
+        "service_4wecnav",
+        "template_svk9cnj",
+        form.current,
+        "6HwrBClDtDi24-ft6"
       );
 
-      // Simulation delay for professional feel
-      await new Promise((r) => setTimeout(r, 1200));
-
-      // Triggering the direct email to md.inbavarunan.zentlyitsolution@gmail.com
-      const mailtoUrl = `mailto:md.inbavarunan.zentlyitsolution@gmail.com?subject=${subject}&body=${body}`;
-      window.location.href = mailtoUrl;
-
       toast({
-        title: "Opening Email Client...",
-        description: "Your message has been prepared for md.inbavarunan.zentlyitsolution@gmail.com",
+        title: "Message Sent Successfully!",
+        description: "Your inquiry has been received. We'll get back to you shortly.",
       });
 
       reset();
     } catch (error) {
+      console.error("EmailJS Error:", error);
       toast({
-        title: "Action Required",
-        description: "We couldn't open your email client. Please email us directly.",
+        title: "Submission Error",
+        description: "We couldn't deliver your message via our automated system. Please try again or contact us via email.",
         variant: "destructive"
       });
     } finally {
@@ -169,6 +159,7 @@ const Contact = () => {
               <SectionReveal>
                 <div className="relative">
                   <form
+                    ref={form}
                     onSubmit={handleSubmit(onSubmit)}
                     className="relative bg-[#0A0A0A] border border-white/10 rounded-[2.5rem] p-8 md:p-16 space-y-10 shadow-2xl"
                   >
@@ -181,21 +172,23 @@ const Contact = () => {
                       <div className="space-y-3">
                         <label className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 ml-1">Full Name</label>
                         <input
-                          {...register("name")}
+                          {...register("user_name")}
+                          name="user_name"
                           className="w-full px-6 py-5 rounded-2xl bg-white/5 border border-white/10 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all text-lg"
                           placeholder="John Doe"
                         />
-                        {errors.name && <p className="text-destructive text-xs font-bold">{errors.name.message}</p>}
+                        {errors.user_name && <p className="text-destructive text-xs font-bold">{errors.user_name.message}</p>}
                       </div>
                       <div className="space-y-3">
                         <label className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 ml-1">Email Address</label>
                         <input
-                          {...register("email")}
+                          {...register("user_email")}
+                          name="user_email"
                           type="email"
                           className="w-full px-6 py-5 rounded-2xl bg-white/5 border border-white/10 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all text-lg"
                           placeholder="john@example.com"
                         />
-                        {errors.email && <p className="text-destructive text-xs font-bold">{errors.email.message}</p>}
+                        {errors.user_email && <p className="text-destructive text-xs font-bold">{errors.user_email.message}</p>}
                       </div>
                     </div>
 
@@ -204,6 +197,7 @@ const Contact = () => {
                         <label className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 ml-1">Phone Number</label>
                         <input
                           {...register("phone")}
+                          name="phone"
                           className="w-full px-6 py-5 rounded-2xl bg-white/5 border border-white/10 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all text-lg"
                           placeholder="+91 XXXXX XXXXX"
                         />
@@ -213,6 +207,7 @@ const Contact = () => {
                         <label className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 ml-1">Service Interested In</label>
                         <select
                           {...register("service")}
+                          name="service"
                           className="w-full px-6 py-5 rounded-2xl bg-[#111111] border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-primary/50 appearance-none transition-all text-lg cursor-pointer"
                           defaultValue=""
                         >
@@ -229,6 +224,7 @@ const Contact = () => {
                       <label className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 ml-1">Message Details</label>
                       <textarea
                         {...register("message")}
+                        name="message"
                         rows={6}
                         className="w-full px-6 py-5 rounded-2xl bg-white/5 border border-white/10 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none transition-all text-lg"
                         placeholder="Describe your vision, goals, and any specific requirements..."
