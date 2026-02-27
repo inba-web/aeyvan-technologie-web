@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import emailjs from "@emailjs/browser";
-import { Send, MapPin, Phone, Mail, Clock, ArrowRight, CheckCircle2 } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, ArrowRight, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import SectionReveal from "@/components/SectionReveal";
 import { COMPANY } from "@/lib/constants";
