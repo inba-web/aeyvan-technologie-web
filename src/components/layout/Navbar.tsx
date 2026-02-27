@@ -22,12 +22,12 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "glass-strong shadow-lg" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "glass-strong shadow-lg" : "bg-transparent"
+        }`}
     >
       <div className="container mx-auto flex items-center justify-between h-16 md:h-20">
-        <Link to="/" className="font-display text-xl md:text-2xl font-bold tracking-tight">
+        <Link to="/" className="flex items-center gap-2 font-display text-xl md:text-2xl font-bold tracking-tight">
+          <img src="/favicon.ico" alt="Zently Logo" className="w-8 h-8 object-contain" />
           <span className="gradient-text">{COMPANY.name}</span>
         </Link>
 
@@ -37,11 +37,10 @@ const Navbar = () => {
             <Link
               key={link.href}
               to={link.href}
-              className={`text-sm font-medium transition-colors duration-200 ${
-                location.pathname === link.href
+              className={`text-sm font-medium transition-colors duration-200 ${location.pathname === link.href
                   ? "text-primary"
                   : "text-muted-foreground hover:text-foreground"
-              }`}
+                }`}
             >
               {link.label}
             </Link>
@@ -78,9 +77,8 @@ const Navbar = () => {
                 <Link
                   key={link.href}
                   to={link.href}
-                  className={`text-lg font-medium ${
-                    location.pathname === link.href ? "text-primary" : "text-muted-foreground"
-                  }`}
+                  className={`text-lg font-medium ${location.pathname === link.href ? "text-primary" : "text-muted-foreground"
+                    }`}
                 >
                   {link.label}
                 </Link>

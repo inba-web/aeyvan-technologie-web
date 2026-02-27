@@ -56,9 +56,10 @@ const SplitText: React.FC<SplitTextProps> = ({
             className={`split-text ${className}`}
             style={{
                 textAlign,
-                overflow: 'hidden',
-                display: 'inline-block',
-                whiteSpace: 'pre-wrap'
+                overflow: 'visible',
+                display: 'block',
+                whiteSpace: 'pre-wrap',
+                paddingBottom: '0.1em'
             }}
         >
             {letters.map((letter, i) => (

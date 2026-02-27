@@ -8,7 +8,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <h3 className="font-display text-xl font-bold gradient-text mb-4">{COMPANY.name}</h3>
+            <div className="flex items-center gap-2 mb-4">
+              <img src="/favicon.ico" alt="Zently Logo" className="w-6 h-6 object-contain" />
+              <h3 className="font-display text-xl font-bold gradient-text">{COMPANY.name}</h3>
+            </div>
             <p className="text-sm text-muted-foreground leading-relaxed mb-4">{COMPANY.tagline}</p>
             <p className="text-sm text-muted-foreground">{COMPANY.location}</p>
           </div>
