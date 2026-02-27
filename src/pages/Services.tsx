@@ -22,7 +22,7 @@ const Services = () => {
             playsInline
             className="w-full h-full object-cover scale-105"
           >
-            <source src="../public/mixkit-computer-hacker-logging-a-website-with-code-47321-hd-ready.mp4" type="video/mp4" />
+            <source src="/mixkit-computer-hacker-logging-a-website-with-code-47321-hd-ready.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-background z-10" />
         </div>
