@@ -4,7 +4,7 @@ export const COMPANY = {
   tagline: "Transforming Ideas into Scalable Digital Products",
   location: "Coimbatore, India",
   phone: "+91 6385609932",
-  email: "info@zently.in",
+  email: "info.itsolution@gmail.com",
   whatsapp: "https://wa.me/916385609932?text=Hello%20Zently%20IT%20Solution%2C%20I%20would%20like%20to%20discuss%20my%20project.",
   mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d250758.19453882225!2d76.89609572891498!3d11.01187397498498!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba859af2f461b59%3A0x5d3d88ef04285a2!2sCoimbatore%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000",
   workingHours: "Mon - Sat: 9:00 AM - 7:00 PM",
@@ -59,6 +59,14 @@ export const SERVICES = [
     features: ["AWS / Azure / GCP", "CI/CD Pipelines", "Container Orchestration", "Infrastructure as Code", "24/7 Monitoring"],
     impact: "99.99% uptime SLA with automated scaling.",
   },
+  {
+    id: "IT Consulting",
+    title: "IT Consulting",
+    icon: "Globe",
+    description: "Scalable cloud infrastructure and automated deployment pipelines for continuous delivery.",
+    features: ["AWS / Azure / GCP", "CI/CD Pipelines", "Container Orchestration", "Infrastructure as Code", "24/7 Monitoring"],
+    impact: "99.99% uptime SLA with automated scaling.",
+  }
 ];
 
 export const CASE_STUDIES = [

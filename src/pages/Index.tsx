@@ -1,12 +1,12 @@
-import { Suspense, lazy } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Globe, Palette, Smartphone, Shield, Cloud, ChevronDown } from "lucide-react";
 import SectionReveal from "@/components/SectionReveal";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import { SERVICES, STATS, TECH_STACK, CASE_STUDIES } from "@/lib/constants";
-
-const HeroScene = lazy(() => import("@/components/HeroScene"));
+import SplitText from "@/components/SplitText";
+import Squares from "@/components/Squares";
+import LogoTicker from "@/components/LogoTicker";
 
 const iconMap: Record<string, React.ReactNode> = {
   Globe: <Globe size={28} />,
@@ -23,43 +23,66 @@ const TESTIMONIALS = [
 ];
 
 const Index = () => {
+  const handleAnimationComplete = () => {
+    console.log('All letters have animated!');
+  };
+
   return (
     <div className="overflow-hidden">
       {/* Hero */}
       <section className="relative min-h-screen flex items-center justify-center">
-        <Suspense fallback={<div className="absolute inset-0 bg-background" />}>
-          <HeroScene />
-        </Suspense>
+        <div className="absolute inset-0 -z-10">
+          <Squares
+            speed={0.5}
+            squareSize={40}
+            direction='diagonal'
+            borderColor='#271E37'
+            hoverFillColor='#222222'
+          />
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background" />
+        </div>
 
         <div className="container mx-auto px-4 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-6"
           >
-            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-primary/10 text-primary border border-primary/20 mb-6">
-              Enterprise Digital Transformation
+            <span className="font-display text-xl md:text-2xl font-bold tracking-[0.2em] uppercase gradient-text">
+              Zently IT Solution
             </span>
           </motion.div>
 
-          <motion.h1
-            className="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 max-w-5xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            Engineering Scalable Digital Solutions for{" "}
-            <span className="gradient-text">Modern Businesses</span>
-          </motion.h1>
+          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-8 max-w-7xl mx-auto flex flex-col items-center justify-center gap-2">
+            <SplitText
+              text="Architecting the Future of"
+              className="text-white"
+              delay={40}
+              duration={1.2}
+              ease="power3.out"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="center"
+              onLetterAnimationComplete={handleAnimationComplete}
+            />
+            <SplitText
+              text="High-Impact Digital Experiences"
+              className="gradient-text"
+              delay={40}
+              duration={1.2}
+              ease="power3.out"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="center"
+            />
+          </h1>
 
-          <motion.p
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            We architect, build, and scale enterprise-grade software products that drive digital transformation across industries.
-          </motion.p>
 
           <motion.div
             className="flex flex-col sm:flex-row gap-4 justify-center"
@@ -92,6 +115,30 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Professional Transition Area */}
+      <div className="relative z-20 -mt-24 mb-12">
+        <div className="container mx-auto px-4">
+          <SectionReveal>
+            <div className="glass-strong rounded-2xl p-8 md:p-12 mb-12 shadow-2xl shadow-primary/5">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-white/5">
+                {STATS.map((stat) => (
+                  <div key={stat.label} className="text-center px-4">
+                    <div className="font-display text-4xl md:text-5xl font-bold gradient-text mb-2">
+                      <AnimatedCounter target={stat.value} suffix={stat.suffix} />
+                    </div>
+                    <p className="text-[10px] md:text-xs uppercase tracking-widest text-muted-foreground font-semibold font-sans">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </SectionReveal>
+        </div>
+
+        <LogoTicker />
+
+        <div className="absolute -bottom-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+      </div>
+
       {/* Services Preview */}
       <section className="section-padding bg-card/30">
         <div className="container mx-auto">
@@ -120,51 +167,6 @@ const Index = () => {
               </SectionReveal>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="section-padding">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {STATS.map((stat, i) => (
-              <SectionReveal key={stat.label} delay={i * 0.1}>
-                <div className="text-center">
-                  <div className="font-display text-4xl md:text-5xl font-bold gradient-text mb-2">
-                    <AnimatedCounter target={stat.value} suffix={stat.suffix} />
-                  </div>
-                  <p className="text-sm text-muted-foreground">{stat.label}</p>
-                </div>
-              </SectionReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Tech Stack */}
-      <section className="section-padding bg-card/30">
-        <div className="container mx-auto">
-          <SectionReveal>
-            <div className="text-center mb-12">
-              <span className="text-sm text-primary font-medium uppercase tracking-wider">Technology</span>
-              <h2 className="font-display text-3xl md:text-4xl font-bold mt-3">Our Tech Stack</h2>
-            </div>
-          </SectionReveal>
-
-          <SectionReveal delay={0.2}>
-            <div className="flex flex-wrap justify-center gap-3">
-              {TECH_STACK.map((tech) => (
-                <motion.span
-                  key={tech}
-                  className="px-5 py-2.5 rounded-full glass text-sm font-medium text-foreground"
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  {tech}
-                </motion.span>
-              ))}
-            </div>
-          </SectionReveal>
         </div>
       </section>
 

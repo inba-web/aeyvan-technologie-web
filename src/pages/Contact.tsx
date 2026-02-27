@@ -135,7 +135,7 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
                     <div>
                       <label className="block text-sm font-medium mb-2">Service Interested In *</label>
                       <select
@@ -149,20 +149,6 @@ const Contact = () => {
                         ))}
                       </select>
                       {errors.service && <p className="text-destructive text-xs mt-1">{errors.service.message}</p>}
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Project Budget *</label>
-                      <select
-                        {...register("budget")}
-                        className="w-full px-4 py-3 rounded-lg bg-muted border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
-                        defaultValue=""
-                      >
-                        <option value="" disabled>Select budget range</option>
-                        {BUDGET_RANGES.map((b) => (
-                          <option key={b} value={b}>{b}</option>
-                        ))}
-                      </select>
-                      {errors.budget && <p className="text-destructive text-xs mt-1">{errors.budget.message}</p>}
                     </div>
                   </div>
 

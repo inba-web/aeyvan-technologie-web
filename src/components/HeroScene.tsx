@@ -33,7 +33,7 @@ function Particles() {
           itemSize={3}
         />
       </bufferGeometry>
-      <pointsMaterial size={0.04} color="#4f8fff" transparent opacity={0.6} sizeAttenuation />
+      <pointsMaterial size={0.04} color="#f97316" transparent opacity={0.6} sizeAttenuation />
     </points>
   );
 }
@@ -51,7 +51,7 @@ function FloatingGrid() {
   return (
     <mesh ref={ref} rotation={[Math.PI / 2, 0, 0]} position={[0, -2, 0]}>
       <planeGeometry args={[30, 30, 30, 30]} />
-      <meshBasicMaterial color="#1e3a5f" wireframe transparent opacity={0.15} />
+      <meshBasicMaterial color="#7c2d12" wireframe transparent opacity={0.15} />
     </mesh>
   );
 }
