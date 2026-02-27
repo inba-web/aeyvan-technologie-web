@@ -8,54 +8,63 @@ const CATEGORIES = ["All", ...Array.from(new Set(CASE_STUDIES.map((c) => c.categ
 
 const Works = () => {
   const [filter, setFilter] = useState("All");
-  const [selectedStudy, setSelectedStudy] = useState<typeof CASE_STUDIES[0] | null>(null);
+  const [selectedStudy, setSelectedStudy] = useState<any>(null);
 
   const filtered = filter === "All" ? CASE_STUDIES : CASE_STUDIES.filter((c) => c.category === filter);
 
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden bg-background">
       {/* Hero */}
-      <section className="section-padding pt-32 md:pt-40 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent" />
+      <section className="section-padding pt-32 md:pt-48 relative overflow-hidden h-[60vh] flex items-center justify-center">
+        {/* Background Image Container */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000&auto=format&fit=crop"
+            alt="Professional Office"
+            className="w-full h-full object-cover opacity-20 transition-opacity duration-1000"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+        </div>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
         <div className="container mx-auto text-center relative z-10">
           <motion.span
-            className="inline-block text-sm text-primary font-medium uppercase tracking-wider mb-4"
+            className="inline-block text-sm text-primary font-bold uppercase tracking-[0.4em] mb-6 bg-primary/10 backdrop-blur-md px-6 py-2 rounded-full border border-primary/20"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            Portfolio
+            Our Portfolio
           </motion.span>
           <motion.h1
-            className="font-display text-4xl md:text-6xl font-bold mb-6"
+            className="font-display text-5xl md:text-8xl font-black mb-8 tracking-tighter leading-none"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
           >
-            Our <span className="gradient-text">Case Studies</span>
+            Digital <span className="gradient-text">Excellence</span> <br />
+            in Action
           </motion.h1>
           <motion.p
-            className="text-lg text-muted-foreground max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto font-light leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            12 enterprise-grade projects delivered with measurable business impact.
+            A curated selection of enterprise-grade projects that redefine industry standards and drive measurable business growth.
           </motion.p>
         </div>
       </section>
 
       {/* Filters */}
-      <section className="container mx-auto px-4 mb-12">
-        <div className="flex flex-wrap justify-center gap-3">
+      <section className="container mx-auto px-4 mb-20">
+        <div className="flex flex-wrap justify-center gap-4">
           {CATEGORIES.map((cat) => (
             <button
               key={cat}
               onClick={() => setFilter(cat)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
-                filter === cat
-                  ? "bg-primary text-primary-foreground"
-                  : "glass text-muted-foreground hover:text-foreground"
-              }`}
+              className={`px-8 py-3 rounded-full text-sm font-bold tracking-widest uppercase transition-all duration-300 ${filter === cat
+                ? "bg-primary text-black shadow-[0_0_20px_rgba(249,115,22,0.4)]"
+                : "bg-white/5 text-white/60 hover:text-white hover:bg-white/10 border border-white/5"
+                }`}
             >
               {cat}
             </button>
@@ -64,48 +73,62 @@ const Works = () => {
       </section>
 
       {/* Grid */}
-      <section className="container mx-auto px-4 pb-20">
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="container mx-auto px-4 pb-40">
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           <AnimatePresence mode="popLayout">
-            {filtered.map((cs) => (
+            {filtered.map((cs: any) => (
               <motion.div
                 key={cs.id}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.5 }}
+                className="group cursor-pointer"
+                onClick={() => setSelectedStudy(cs)}
               >
-                <div
-                  className="glass rounded-xl p-6 hover-lift cursor-pointer group"
-                  onClick={() => setSelectedStudy(cs)}
-                >
-                  <div className="h-44 rounded-lg bg-gradient-to-br from-primary/20 to-accent/10 mb-5 flex items-center justify-center">
-                    <span className="font-display text-3xl font-bold text-primary/30">
-                      {String(cs.id).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <span className="text-xs text-primary font-medium uppercase tracking-wider">{cs.category}</span>
-                  <h3 className="font-display text-lg font-semibold mt-1 mb-3 group-hover:text-primary transition-colors">
-                    {cs.title}
-                  </h3>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {cs.tags.map((tag) => (
-                      <span key={tag} className="text-xs px-2 py-1 rounded-md bg-muted text-muted-foreground">{tag}</span>
-                    ))}
-                  </div>
-                  <div className="grid grid-cols-3 gap-3 text-center">
-                    <div>
-                      <p className="text-sm font-bold text-primary">{cs.metrics.efficiency}</p>
-                      <p className="text-xs text-muted-foreground">Efficiency</p>
+                <div className="relative overflow-hidden rounded-[2.5rem] bg-card border border-white/5 hover:border-primary/40 transition-all duration-500 shadow-2xl h-full flex flex-col">
+                  {/* Image Container */}
+                  <div className="relative h-64 overflow-hidden">
+                    <img
+                      src={cs.image}
+                      alt={cs.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
+                    <div className="absolute top-6 right-6">
+                      <span className="px-4 py-2 rounded-full bg-black/50 backdrop-blur-md text-xs font-bold text-white border border-white/10 uppercase tracking-widest leading-none flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                        {cs.category}
+                      </span>
                     </div>
-                    <div>
-                      <p className="text-sm font-bold text-primary">{cs.metrics.cost}</p>
-                      <p className="text-xs text-muted-foreground">Cost</p>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-10 flex-grow flex flex-col">
+                    <h3 className="font-display text-2xl font-bold text-white mb-4 group-hover:text-primary transition-colors leading-tight">
+                      {cs.title}
+                    </h3>
+
+                    <div className="flex flex-wrap gap-2 mb-8">
+                      {cs.tags.map((tag: string) => (
+                        <span key={tag} className="text-[10px] px-3 py-1 rounded-full bg-white/5 text-white/40 uppercase font-bold tracking-widest border border-white/5">{tag}</span>
+                      ))}
                     </div>
-                    <div>
-                      <p className="text-sm font-bold text-primary">{cs.metrics.users}</p>
-                      <p className="text-xs text-muted-foreground">Users</p>
+
+                    <div className="grid grid-cols-3 gap-4 border-t border-white/5 pt-8 mt-auto">
+                      <div>
+                        <p className="text-xl font-black text-primary leading-none mb-2">{cs.metrics.efficiency}</p>
+                        <p className="text-[10px] text-white/40 uppercase font-bold tracking-widest">Efficiency</p>
+                      </div>
+                      <div>
+                        <p className="text-xl font-black text-primary leading-none mb-2">{cs.metrics.cost}</p>
+                        <p className="text-[10px] text-white/40 uppercase font-bold tracking-widest">Savings</p>
+                      </div>
+                      <div>
+                        <p className="text-xl font-black text-primary leading-none mb-2">{cs.metrics.users}</p>
+                        <p className="text-[10px] text-white/40 uppercase font-bold tracking-widest">Scale</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -115,83 +138,107 @@ const Works = () => {
         </motion.div>
       </section>
 
-      {/* Modal */}
+      {/* Modern Modal */}
       <AnimatePresence>
         {selectedStudy && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={() => setSelectedStudy(null)} />
+            <div className="absolute inset-0 bg-black/95 backdrop-blur-2xl" onClick={() => setSelectedStudy(null)} />
             <motion.div
-              className="relative glass-strong rounded-2xl max-w-3xl w-full max-h-[85vh] overflow-y-auto p-8 md:p-12"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative bg-[#0A0A0A] border border-white/10 rounded-[3rem] max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col md:flex-row shadow-[0_0_100px_rgba(249,115,22,0.1)]"
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 100, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
             >
+              {/* Close Button */}
               <button
                 onClick={() => setSelectedStudy(null)}
-                className="absolute top-4 right-4 p-2 rounded-lg hover:bg-muted transition-colors text-muted-foreground"
+                className="absolute top-8 right-8 z-[110] w-12 h-12 rounded-full bg-white/5 hover:bg-primary hover:text-black transition-all flex items-center justify-center text-white border border-white/10"
               >
-                <X size={20} />
+                <X size={24} />
               </button>
 
-              <span className="text-xs text-primary font-medium uppercase tracking-wider">{selectedStudy.category}</span>
-              <h2 className="font-display text-3xl font-bold mt-2 mb-6">{selectedStudy.title}</h2>
-
-              <div className="h-56 rounded-xl bg-gradient-to-br from-primary/20 to-accent/10 mb-8 flex items-center justify-center">
-                <span className="font-display text-5xl font-bold text-primary/20">
-                  {String(selectedStudy.id).padStart(2, "0")}
-                </span>
+              {/* Modal Sidebar (Image) */}
+              <div className="w-full md:w-2/5 relative h-64 md:h-auto overflow-hidden">
+                <img src={selectedStudy.image} alt={selectedStudy.title} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent md:hidden" />
               </div>
 
-              <div className="space-y-8">
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <Layers size={18} className="text-primary" />
-                    <h3 className="font-display font-semibold text-lg">Problem Statement</h3>
-                  </div>
-                  <p className="text-muted-foreground">{selectedStudy.problem}</p>
-                </div>
+              {/* Modal Content */}
+              <div className="w-full md:w-3/5 p-10 md:p-16 overflow-y-auto custom-scrollbar">
+                <span className="text-sm text-primary font-bold uppercase tracking-[0.4em] mb-4 inline-block">{selectedStudy.category}</span>
+                <h2 className="font-display text-4xl md:text-5xl font-black text-white mb-10 tracking-tight leading-none">{selectedStudy.title}</h2>
 
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <Zap size={18} className="text-primary" />
-                    <h3 className="font-display font-semibold text-lg">Solution Architecture</h3>
-                  </div>
-                  <p className="text-muted-foreground">{selectedStudy.solution}</p>
-                </div>
-
-                <div>
-                  <h3 className="font-display font-semibold text-lg mb-3">Technologies Used</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedStudy.tags.map((tag) => (
-                      <span key={tag} className="px-3 py-1.5 rounded-full glass text-sm font-medium">{tag}</span>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex items-center gap-2 mb-4">
-                    <TrendingUp size={18} className="text-primary" />
-                    <h3 className="font-display font-semibold text-lg">Impact Metrics</h3>
-                  </div>
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="glass rounded-xl p-5 text-center">
-                      <p className="font-display text-2xl font-bold gradient-text">{selectedStudy.metrics.efficiency}</p>
-                      <p className="text-xs text-muted-foreground mt-1">Efficiency Gain</p>
+                <div className="space-y-12 mb-12">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div>
+                      <div className="flex items-center gap-3 mb-5">
+                        <Layers size={20} className="text-primary" />
+                        <h3 className="font-bold text-white uppercase tracking-widest text-xs">The Challenge</h3>
+                      </div>
+                      <p className="text-white/60 leading-relaxed font-light">{selectedStudy.problem}</p>
                     </div>
-                    <div className="glass rounded-xl p-5 text-center">
-                      <p className="font-display text-2xl font-bold gradient-text">{selectedStudy.metrics.cost}</p>
-                      <p className="text-xs text-muted-foreground mt-1">Cost Reduction</p>
-                    </div>
-                    <div className="glass rounded-xl p-5 text-center">
-                      <p className="font-display text-2xl font-bold gradient-text">{selectedStudy.metrics.users}</p>
-                      <p className="text-xs text-muted-foreground mt-1">Active Users</p>
+
+                    <div>
+                      <div className="flex items-center gap-3 mb-5">
+                        <Zap size={20} className="text-primary" />
+                        <h3 className="font-bold text-white uppercase tracking-widest text-xs">The Solution</h3>
+                      </div>
+                      <p className="text-white/60 leading-relaxed font-light">{selectedStudy.solution}</p>
                     </div>
                   </div>
+
+                  <div>
+                    <h3 className="font-bold text-white uppercase tracking-widest text-xs mb-6">Core Tech Stack</h3>
+                    <div className="flex flex-wrap gap-3">
+                      {selectedStudy.tags.map((tag: string) => (
+                        <span key={tag} className="px-5 py-2 rounded-full bg-white/5 border border-white/5 text-sm font-medium text-white/80">{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="bg-primary/5 border border-primary/10 rounded-[2rem] p-10">
+                    <div className="flex items-center gap-3 mb-8">
+                      <TrendingUp size={24} className="text-primary" />
+                      <h3 className="font-bold text-white uppercase tracking-widest text-sm">Business Outcomes</h3>
+                    </div>
+                    <div className="grid grid-cols-3 gap-6">
+                      <div className="text-center">
+                        <p className="font-display text-3xl font-black text-primary mb-1">{selectedStudy.metrics.efficiency}</p>
+                        <p className="text-[10px] text-white/40 uppercase font-bold tracking-[0.2em]">Efficiency</p>
+                      </div>
+                      <div className="text-center border-x border-white/5">
+                        <p className="font-display text-3xl font-black text-primary mb-1">{selectedStudy.metrics.cost}</p>
+                        <p className="text-[10px] text-white/40 uppercase font-bold tracking-[0.2em]">ROI</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="font-display text-3xl font-black text-primary mb-1">{selectedStudy.metrics.users}</p>
+                        <p className="text-[10px] text-white/40 uppercase font-bold tracking-[0.2em]">Scale</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-6">
+                  <a
+                    href={selectedStudy.liveLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 inline-flex items-center justify-center gap-4 px-10 py-6 rounded-2xl bg-primary text-black font-black text-lg hover:scale-[1.02] transition-all shadow-[0_20px_40px_rgba(249,115,22,0.25)] group"
+                  >
+                    Visit Live Project <ArrowRight size={22} className="group-hover:translate-x-1 transition-transform" />
+                  </a>
+                  <button
+                    onClick={() => setSelectedStudy(null)}
+                    className="px-10 py-6 rounded-2xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition-all"
+                  >
+                    Go Back
+                  </button>
                 </div>
               </div>
             </motion.div>

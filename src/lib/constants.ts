@@ -27,6 +27,7 @@ export const SERVICES = [
     description: "Enterprise-grade web applications built with cutting-edge technologies for maximum performance and scalability.",
     features: ["Progressive Web Apps", "SaaS Platforms", "API Development", "Microservices Architecture", "Real-time Applications"],
     impact: "3x faster time-to-market with our agile development process.",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop"
   },
   {
     id: "website-redesign",
@@ -35,6 +36,7 @@ export const SERVICES = [
     description: "Transform outdated websites into modern, high-converting digital experiences that drive business growth.",
     features: ["UX Audit & Strategy", "Responsive Design", "Performance Optimization", "SEO Enhancement", "Conversion Optimization"],
     impact: "Average 180% increase in user engagement post-redesign.",
+    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=1200&auto=format&fit=crop"
   },
   {
     id: "mobile-development",
@@ -43,6 +45,7 @@ export const SERVICES = [
     description: "Native and cross-platform mobile applications that deliver seamless user experiences across all devices.",
     features: ["iOS & Android Development", "React Native / Flutter", "App Store Optimization", "Push Notifications", "Offline Functionality"],
     impact: "50M+ combined downloads across client applications.",
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=1200&auto=format&fit=crop"
   },
   {
     id: "cyber-security",
@@ -51,6 +54,7 @@ export const SERVICES = [
     description: "Comprehensive security solutions to protect your digital assets and ensure regulatory compliance.",
     features: ["Penetration Testing", "Security Audits", "Compliance (GDPR, HIPAA)", "Incident Response", "Vulnerability Management"],
     impact: "Zero security breaches across all managed clients.",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop"
   },
   {
     id: "cloud-devops",
@@ -59,30 +63,108 @@ export const SERVICES = [
     description: "Scalable cloud infrastructure and automated deployment pipelines for continuous delivery.",
     features: ["AWS / Azure / GCP", "CI/CD Pipelines", "Container Orchestration", "Infrastructure as Code", "24/7 Monitoring"],
     impact: "99.99% uptime SLA with automated scaling.",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop"
   },
   {
     id: "IT Consulting",
     title: "IT Consulting",
     icon: "Globe",
-    description: "Scalable cloud infrastructure and automated deployment pipelines for continuous delivery.",
-    features: ["AWS / Azure / GCP", "CI/CD Pipelines", "Container Orchestration", "Infrastructure as Code", "24/7 Monitoring"],
-    impact: "99.99% uptime SLA with automated scaling.",
+    description: "Strategic guidance to align your IT infrastructure with business objectives and drive innovation.",
+    features: ["Digital Transformation", "IT Roadmap Planning", "Tech Stack Strategy", "Cloud Migration Strategy", "Architecture Review"],
+    impact: "Average 40% reduction in IT overhead costs.",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop"
   }
 ];
 
 export const CASE_STUDIES = [
-  { id: 1, title: "Enterprise ERP System", category: "Enterprise", tags: ["React", "Node.js", "PostgreSQL", "Docker"], problem: "Legacy ERP causing operational delays and data silos across 50+ departments.", solution: "Built a unified cloud-native ERP with real-time analytics, automated workflows, and modular architecture.", metrics: { efficiency: "+340%", cost: "-60%", users: "5,000+" } },
-  { id: 2, title: "Advanced CRM Platform", category: "SaaS", tags: ["Next.js", "TypeScript", "MongoDB", "AWS"], problem: "Fragmented customer data leading to poor sales pipeline visibility.", solution: "Developed AI-powered CRM with predictive analytics, automated lead scoring, and omni-channel integration.", metrics: { efficiency: "+250%", cost: "-45%", users: "12,000+" } },
-  { id: 3, title: "Hostel Management System", category: "Management", tags: ["React", "Express", "MySQL", "Redis"], problem: "Manual hostel operations causing booking errors and poor occupancy tracking.", solution: "Automated room allocation, payment processing, and real-time occupancy dashboard.", metrics: { efficiency: "+200%", cost: "-50%", users: "3,000+" } },
-  { id: 4, title: "Hospital Management System", category: "Healthcare", tags: ["React", "Python", "PostgreSQL", "Docker"], problem: "Paper-based patient records causing diagnostic delays and compliance issues.", solution: "HIPAA-compliant HMS with EMR, appointment scheduling, and pharmacy management.", metrics: { efficiency: "+280%", cost: "-55%", users: "8,000+" } },
-  { id: 5, title: "Multi-vendor E-commerce", category: "E-commerce", tags: ["Next.js", "Node.js", "MongoDB", "Stripe"], problem: "Single-vendor platform limiting marketplace growth and vendor acquisition.", solution: "Scalable multi-vendor marketplace with admin dashboard, analytics, and payment splitting.", metrics: { efficiency: "+320%", cost: "-40%", users: "25,000+" } },
-  { id: 6, title: "Finance Analytics Dashboard", category: "Fintech", tags: ["React", "D3.js", "Python", "AWS"], problem: "Manual financial reporting consuming 40+ hours per week.", solution: "Real-time analytics dashboard with automated reporting, forecasting, and compliance tracking.", metrics: { efficiency: "+400%", cost: "-70%", users: "2,000+" } },
-  { id: 7, title: "Food Delivery Mobile App", category: "Mobile", tags: ["React Native", "Node.js", "MongoDB", "Firebase"], problem: "Local restaurants lacking digital presence and delivery capabilities.", solution: "Full-featured delivery app with real-time tracking, payment integration, and restaurant management.", metrics: { efficiency: "+180%", cost: "-35%", users: "50,000+" } },
-  { id: 8, title: "Travel Booking Platform", category: "Travel", tags: ["Next.js", "GraphQL", "PostgreSQL", "AWS"], problem: "Complex booking flow causing 60% cart abandonment rate.", solution: "Streamlined booking engine with dynamic pricing, itinerary builder, and multi-currency support.", metrics: { efficiency: "+220%", cost: "-42%", users: "15,000+" } },
-  { id: 9, title: "Learning Management System", category: "EdTech", tags: ["React", "Node.js", "MongoDB", "WebRTC"], problem: "Institutions lacking scalable online learning infrastructure.", solution: "Feature-rich LMS with live classes, automated assessments, and progress tracking.", metrics: { efficiency: "+300%", cost: "-50%", users: "30,000+" } },
-  { id: 10, title: "Inventory Management System", category: "Logistics", tags: ["React", "Express", "PostgreSQL", "Docker"], problem: "Manual inventory tracking causing stockouts and overstock situations.", solution: "AI-driven inventory system with demand forecasting, automated reordering, and warehouse management.", metrics: { efficiency: "+350%", cost: "-55%", users: "4,000+" } },
-  { id: 11, title: "Real Estate Platform", category: "PropTech", tags: ["Next.js", "Node.js", "MongoDB", "Mapbox"], problem: "Fragmented property listings and poor buyer-seller connectivity.", solution: "Unified platform with virtual tours, AI valuations, and document management.", metrics: { efficiency: "+260%", cost: "-48%", users: "20,000+" } },
-  { id: 12, title: "HR Management System", category: "Enterprise", tags: ["React", "Python", "PostgreSQL", "Redis"], problem: "Manual HR processes causing payroll errors and compliance risks.", solution: "Comprehensive HRMS with payroll automation, performance management, and compliance tracking.", metrics: { efficiency: "+290%", cost: "-52%", users: "6,000+" } },
+  {
+    id: 1,
+    title: "Enterprise ERP System",
+    category: "Enterprise",
+    tags: ["React", "Node.js", "PostgreSQL"],
+    problem: "Legacy ERP causing operational delays and data silos across 50+ departments.",
+    solution: "Built a unified cloud-native ERP with real-time analytics, automated workflows, and modular architecture.",
+    metrics: { efficiency: "+340%", cost: "-60%", users: "5,000+" },
+    image: "https://www.appventurez.com/wp-content/uploads/2024/08/unnamed.png",
+    liveLink: "https://demo-erp-enterprise.vercel.app"
+  },
+  {
+    id: 2,
+    title: "Advanced CRM Platform",
+    category: "SaaS",
+    tags: ["Next.js", "TypeScript", "AWS"],
+    problem: "Fragmented customer data leading to poor sales pipeline visibility.",
+    solution: "Developed AI-powered CRM with predictive analytics, automated lead scoring, and omni-channel integration.",
+    metrics: { efficiency: "+250%", cost: "-45%", users: "12,000+" },
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop",
+    liveLink: "https://modern-crm-demo.vercel.app"
+  },
+  {
+    id: 3,
+    title: "Hostel Management System",
+    category: "Management",
+    tags: ["React", "Express", "MySQL"],
+    problem: "Manual hostel operations causing booking errors and poor occupancy tracking.",
+    solution: "Automated room allocation, payment processing, and real-time occupancy dashboard.",
+    metrics: { efficiency: "+200%", cost: "-50%", users: "3,000+" },
+    image: "https://plus.unsplash.com/premium_photo-1716767947952-42e8fe3a28a2?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    liveLink: "https://hostelmgt-pro.vercel.app"
+  },
+  {
+    id: 4,
+    title: "Hospital Management System",
+    category: "Healthcare",
+    tags: ["React", "Python", "PostgreSQL"],
+    problem: "Paper-based patient records causing diagnostic delays and compliance issues.",
+    solution: "HIPAA-compliant HMS with EMR, appointment scheduling, and pharmacy management.",
+    metrics: { efficiency: "+280%", cost: "-55%", users: "8,000+" },
+    image: "https://docpulse.com/wp-content/uploads/2024/02/slider-small-1.jpg",
+    liveLink: "https://medicare-hms-portal.vercel.app"
+  },
+  {
+    id: 5,
+    title: "Multi-vendor E-commerce",
+    category: "E-commerce",
+    tags: ["Next.js", "Node.js", "Stripe"],
+    problem: "Single-vendor platform limiting marketplace growth and vendor acquisition.",
+    solution: "Scalable multi-vendor marketplace with admin dashboard, analytics, and payment splitting.",
+    metrics: { efficiency: "+320%", cost: "-40%", users: "25,000+" },
+    image: "https://www.code-brew.com/wp-content/uploads/2019/10/Header-Image.jpg",
+    liveLink: "https://zently-marketplace.vercel.app"
+  },
+  {
+    id: 6,
+    title: "Finance Analytics Dashboard",
+    category: "Fintech",
+    tags: ["React", "D3.js", "Python"],
+    problem: "Manual financial reporting consuming 40+ hours per week.",
+    solution: "Real-time analytics dashboard with automated reporting, forecasting, and compliance tracking.",
+    metrics: { efficiency: "+400%", cost: "-70%", users: "2,000+" },
+    image: "https://www.geckoboard.com/uploads/Cashflow-dashboard-example.png",
+    liveLink: "https://fin-analytics-suite.vercel.app"
+  },
+  {
+    id: 7,
+    title: "Food Delivery Mobile App",
+    category: "Mobile",
+    tags: ["React Native", "Firebase"],
+    problem: "Local restaurants lacking digital presence and delivery capabilities.",
+    solution: "Full-featured delivery app with real-time tracking, payment integration, and restaurant management.",
+    metrics: { efficiency: "+180%", cost: "-35%", users: "50,000+" },
+    image: "https://www.businessofapps.com/wp-content/uploads/2022/01/emizen_tech_food_deliver_img1.png",
+    liveLink: "https://food-fast-deliver.vercel.app"
+  },
+  {
+    id: 8,
+    title: "Travel Booking Platform",
+    category: "Travel",
+    tags: ["Next.js", "GraphQL", "AWS"],
+    problem: "Complex booking flow causing 60% cart abandonment rate.",
+    solution: "Streamlined booking engine with dynamic pricing, itinerary builder, and multi-currency support.",
+    metrics: { efficiency: "+220%", cost: "-42%", users: "15,000+" },
+    image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=1200&auto=format&fit=crop",
+    liveLink: "https://travel-ease-booking.vercel.app"
+  }
 ];
 
 export const TECH_STACK = [
