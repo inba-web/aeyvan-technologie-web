@@ -25,10 +25,10 @@ const Navbar = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "glass-strong shadow-lg" : "bg-transparent"
         }`}
     >
-      <div className="container mx-auto flex items-center justify-between h-16 md:h-20">
-        <Link to="/" className="flex items-center gap-2 font-display text-xl md:text-2xl font-bold tracking-tight">
-          <img src="/favicon.ico" alt="Zently Logo" className="w-8 h-8 object-contain" />
-          <span className="gradient-text">{COMPANY.name}</span>
+      <div className="container mx-auto flex items-center justify-between h-16 md:h-20 px-4">
+        <Link to="/" className="flex items-center group">
+          <img src="/favicon.png" alt="Zently Logo" className="w-[3.1em] h-[3.1em] object-contain logo-glow group-hover:scale-110 transition-all duration-500 mr-[-0.1em] mt-[-0.1em]" />
+          <h3 className="font-display text-2xl font-bold tracking-tight gradient-text">Zently IT Solution</h3>
         </Link>
 
         {/* Desktop Nav */}
@@ -38,8 +38,8 @@ const Navbar = () => {
               key={link.href}
               to={link.href}
               className={`text-sm font-medium transition-colors duration-200 ${location.pathname === link.href
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
+                ? "text-primary"
+                : "text-muted-foreground hover:text-foreground"
                 }`}
             >
               {link.label}
@@ -47,7 +47,7 @@ const Navbar = () => {
           ))}
           <Link
             to="/contact"
-            className="px-5 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity glow-sm"
+            className="px-6 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:opacity-90 transition-all glow-sm active:scale-95"
           >
             Get Started
           </Link>
@@ -70,14 +70,14 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass-strong border-t border-border"
+            className="md:hidden glass-strong border-t border-border shadow-2xl"
           >
-            <nav className="container mx-auto py-6 flex flex-col gap-4">
+            <nav className="container mx-auto py-8 px-4 flex flex-col gap-5">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
                   to={link.href}
-                  className={`text-lg font-medium ${location.pathname === link.href ? "text-primary" : "text-muted-foreground"
+                  className={`text-lg font-semibold tracking-wide ${location.pathname === link.href ? "text-primary" : "text-muted-foreground hover:text-foreground transition-colors"
                     }`}
                 >
                   {link.label}
@@ -85,7 +85,7 @@ const Navbar = () => {
               ))}
               <Link
                 to="/contact"
-                className="mt-2 px-5 py-3 rounded-lg bg-primary text-primary-foreground text-center font-semibold"
+                className="mt-4 px-5 py-4 rounded-xl bg-primary text-primary-foreground text-center font-bold shadow-lg shadow-primary/20 active:scale-[0.98] transition-transform"
               >
                 Get Started
               </Link>

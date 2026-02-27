@@ -1,155 +1,250 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { ArrowRight, Target, Eye, Rocket, Users } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Target, Eye, Rocket, Users, ChevronLeft, ChevronRight } from "lucide-react";
 import SectionReveal from "@/components/SectionReveal";
+import TiltedCard from "@/components/TiltedCard";
 
-const TIMELINE = [
-  { year: "2019", title: "Founded", desc: "Zently IT Solution started with a vision to deliver enterprise-grade digital products from Coimbatore." },
-  { year: "2020", title: "First Enterprise Client", desc: "Delivered our first large-scale ERP system, establishing credibility in enterprise software." },
-  { year: "2021", title: "Team Expansion", desc: "Grew to 30+ engineers, designers, and strategists. Expanded into mobile and cloud services." },
-  { year: "2022", title: "50+ Projects", desc: "Crossed the milestone of 50 successful project deliveries across healthcare, fintech, and e-commerce." },
-  { year: "2023", title: "Global Reach", desc: "Started serving international clients across Asia, Middle East, and North America." },
-  { year: "2024", title: "Innovation Lab", desc: "Launched our R&D lab focused on AI/ML, blockchain, and emerging technology solutions." },
+const ABOUT_IMAGES = [
+  "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2000&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=2000&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1600880212340-023440ea911a?q=80&w=2000&auto=format&fit=crop"
 ];
 
 const About = () => {
+  const [currentImg, setCurrentImg] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImg((prev) => (prev + 1) % ABOUT_IMAGES.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="overflow-hidden">
-      {/* Hero */}
-      <section className="section-padding pt-32 md:pt-40 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent" />
-        <div className="container mx-auto text-center relative z-10">
-          <motion.span
-            className="inline-block text-sm text-primary font-medium uppercase tracking-wider mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+      {/* Fullscreen Hero Carousel */}
+      <section className="relative h-screen w-full overflow-hidden">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentImg}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.05 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            className="absolute inset-0"
           >
-            About Us
+            <img
+              src={ABOUT_IMAGES[currentImg]}
+              alt="Professional Meeting"
+              className="w-full h-full object-cover"
+            />
+            {/* Dark Overlay for content readability */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-background" />
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Hero Content */}
+        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
+          <motion.span
+            className="inline-block text-sm text-primary font-bold uppercase tracking-[0.4em] mb-6 bg-primary/10 backdrop-blur-md px-6 py-2 rounded-full border border-primary/20"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            Our Identity
           </motion.span>
           <motion.h1
-            className="font-display text-4xl md:text-6xl font-bold mb-6"
-            initial={{ opacity: 0, y: 20 }}
+            className="font-display text-5xl md:text-7xl lg:text-8xl font-black mb-8 tracking-tighter text-white"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
           >
-            Building the Future of{" "}
-            <span className="gradient-text">Digital Innovation</span>
+            Pioneering <span className="gradient-text">Digital Mastery</span>
           </motion.h1>
           <motion.p
-            className="text-lg text-muted-foreground max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
+            className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed font-light"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            We are a team of passionate engineers, designers, and strategists dedicated to transforming ideas into scalable digital products.
+            We are a collective of visionaries and architects dedicated to redefining the enterprise landscape through technical precision and boundary-pushing innovation.
           </motion.p>
+        </div>
+
+        {/* Carousel Controls */}
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-30 flex items-center gap-6">
+          <button
+            onClick={() => setCurrentImg((prev) => (prev - 1 + ABOUT_IMAGES.length) % ABOUT_IMAGES.length)}
+            className="p-3 rounded-full glass hover:bg-primary/20 transition-all text-white border border-white/10"
+          >
+            <ChevronLeft size={24} />
+          </button>
+
+          <div className="flex gap-3">
+            {ABOUT_IMAGES.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentImg(i)}
+                className={`h-1.5 transition-all duration-500 rounded-full ${i === currentImg ? "w-12 bg-primary shadow-[0_0_15px_rgba(249,115,22,0.5)]" : "w-3 bg-white/20 hover:bg-white/40"
+                  }`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={() => setCurrentImg((prev) => (prev + 1) % ABOUT_IMAGES.length)}
+            className="p-3 rounded-full glass hover:bg-primary/20 transition-all text-white border border-white/10"
+          >
+            <ChevronRight size={24} />
+          </button>
         </div>
       </section>
 
       {/* Vision & Mission */}
-      <section className="section-padding">
+      <section className="section-padding bg-background relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24">
             <SectionReveal>
-              <div className="glass rounded-xl p-10 h-full hover-lift">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-6">
-                  <Eye size={24} />
-                </div>
-                <h3 className="font-display text-2xl font-bold mb-4">Our Vision</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  To be the most trusted enterprise technology partner for businesses worldwide, driving digital transformation through innovative and scalable solutions.
-                </p>
-              </div>
+              <TiltedCard
+                imageSrc="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=800"
+                altText="Our Vision"
+                captionText="Our Vision"
+                containerHeight="500px"
+                containerWidth="100%"
+                imageHeight="100%"
+                imageWidth="100%"
+                rotateAmplitude={6}
+                displayOverlayContent={true}
+                overlayContent={
+                  <div className="p-8 md:p-12 h-full flex flex-col justify-end bg-gradient-to-t from-black via-black/30 to-transparent rounded-[15px]">
+                    <div className="w-14 h-14 rounded-2xl bg-primary/20 backdrop-blur-md flex items-center justify-center text-primary mb-6 border border-primary/30 shadow-xl">
+                      <Eye size={32} />
+                    </div>
+                    <h3 className="font-display text-4xl font-bold text-white mb-4">Our Vision</h3>
+                    <p className="text-white/80 text-lg leading-relaxed font-medium">
+                      To be the most trusted enterprise technology partner for businesses worldwide, driving digital transformation through innovative and scalable solutions that bridge the gap between imagination and reality.
+                    </p>
+                  </div>
+                }
+              />
             </SectionReveal>
-            <SectionReveal delay={0.1}>
-              <div className="glass rounded-xl p-10 h-full hover-lift">
-                <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center text-accent mb-6">
-                  <Target size={24} />
-                </div>
-                <h3 className="font-display text-2xl font-bold mb-4">Our Mission</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  To engineer high-quality, production-ready digital products that solve real business challenges, enabling our clients to scale and compete in the global market.
-                </p>
-              </div>
+
+            <SectionReveal delay={0.2}>
+              <TiltedCard
+                imageSrc="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=800"
+                altText="Our Mission"
+                captionText="Our Mission"
+                containerHeight="500px"
+                containerWidth="100%"
+                imageHeight="100%"
+                imageWidth="100%"
+                rotateAmplitude={6}
+                displayOverlayContent={true}
+                overlayContent={
+                  <div className="p-8 md:p-12 h-full flex flex-col justify-end bg-gradient-to-t from-accent/60 via-black/30 to-transparent rounded-[15px]">
+                    <div className="w-14 h-14 rounded-2xl bg-accent/20 backdrop-blur-md flex items-center justify-center text-accent mb-6 border border-accent/30 shadow-xl">
+                      <Target size={32} />
+                    </div>
+                    <h3 className="font-display text-4xl font-bold text-white mb-4">Our Mission</h3>
+                    <p className="text-white/80 text-lg leading-relaxed font-medium">
+                      To engineer high-quality, production-ready digital products that solve real business challenges, enabling our clients to scale and compete in the global market through technical excellence and strategic partnership.
+                    </p>
+                  </div>
+                }
+              />
             </SectionReveal>
           </div>
         </div>
       </section>
 
-      {/* Timeline */}
-      <section className="section-padding bg-card/30">
+      {/* Timeline Story */}
+      <section className="section-padding bg-card/20 border-y border-white/5">
         <div className="container mx-auto">
           <SectionReveal>
-            <div className="text-center mb-16">
-              <span className="text-sm text-primary font-medium uppercase tracking-wider">Our Journey</span>
-              <h2 className="font-display text-3xl md:text-4xl font-bold mt-3">Company Timeline</h2>
+            <div className="text-center mb-20">
+              <span className="text-sm text-primary font-bold uppercase tracking-[0.4em]">Historical Trajectory</span>
+              <h2 className="font-display text-5xl md:text-6xl font-black mt-6 tracking-tight">Our <span className="gradient-text">DNA</span></h2>
+              <div className="w-32 h-1 bg-primary/40 mx-auto mt-8 rounded-full" />
             </div>
           </SectionReveal>
 
-          <div className="max-w-3xl mx-auto relative">
-            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-border" />
-            {TIMELINE.map((item, i) => (
-              <SectionReveal key={item.year} delay={i * 0.1}>
-                <div className={`relative flex items-start gap-8 mb-12 ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}>
-                  <div className="hidden md:block md:w-1/2" />
-                  <div className="absolute left-4 md:left-1/2 w-3 h-3 rounded-full bg-primary -translate-x-1.5 mt-2 glow-sm" />
-                  <div className="ml-12 md:ml-0 md:w-1/2 glass rounded-xl p-6">
-                    <span className="text-sm text-primary font-semibold">{item.year}</span>
-                    <h3 className="font-display text-lg font-bold mt-1">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground mt-2">{item.desc}</p>
-                  </div>
+          <div className="max-w-5xl mx-auto glass-strong rounded-[3rem] p-10 md:p-20 border border-white/10 relative shadow-2xl">
+            <div className="flex items-start gap-12 flex-col md:flex-row">
+              <div className="w-24 h-24 rounded-[2rem] bg-primary/10 flex items-center justify-center text-primary flex-shrink-0 border border-primary/20 shadow-xl glow-sm">
+                <Rocket size={48} />
+              </div>
+              <div className="space-y-8">
+                <h3 className="font-display text-4xl font-extrabold leading-tight text-white">Transitioning from <span className="text-primary italic">Global Freelancing</span> to Corporate Leadership</h3>
+                <div className="space-y-6 text-xl text-white/70 leading-relaxed font-light">
+                  <p>
+                    We have been operating successfully as elite international freelancers for over <span className="text-white font-bold px-2 py-0.5 bg-primary/20 rounded">two years</span>, collaborating with industry leaders across borders.
+                  </p>
+                  <p>
+                    This deep global exposure inspired us to formalize our expertise into <span className="text-primary font-bold">Zently IT Solution</span>. Backed by a high-caliber team of engineers and designers, we are now focused on building the future of enterprise technology.
+                  </p>
+                  <p>
+                    Our mission is to empower business architects and startup founders by delivering <span className="text-white font-medium border-b-2 border-primary/30">world-class landing pages</span>, high-performance websites, and massive <span className="text-white font-medium border-b-2 border-primary/30">enterprise-grade ecosystems</span>.
+                  </p>
                 </div>
-              </SectionReveal>
-            ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Founder */}
-      <section className="section-padding">
-        <div className="container mx-auto max-w-4xl">
+      {/* Founder Message Section */}
+      <section className="section-padding overflow-hidden">
+        <div className="container mx-auto max-w-5xl">
           <SectionReveal>
-            <div className="glass rounded-xl p-10 md:p-16 text-center">
-              <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto mb-6">
-                <Users size={32} />
-              </div>
-              <h3 className="font-display text-2xl font-bold mb-2">From the Founder</h3>
-              <p className="text-muted-foreground leading-relaxed text-lg italic mb-6">
-                "At Zently, we don't just write code — we engineer solutions that transform businesses. Every product we build is crafted with the precision and scalability that enterprise clients demand. Our commitment to quality and innovation drives everything we do."
+            <div className="glass-strong rounded-[3rem] p-12 md:p-24 text-center relative border border-white/10 shadow-2xl">
+              {/* Artistic Glows */}
+              <div className="absolute -top-24 -left-24 w-64 h-64 bg-primary/20 blur-[120px] rounded-full pointer-events-none" />
+              <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-accent/20 blur-[120px] rounded-full pointer-events-none" />
+
+              <p className="text-white leading-snug text-3xl md:text-5xl font-display font-bold italic mb-12 tracking-tighter">
+                "At Zently, we don't just write code — we engineer solutions that transform businesses. Every product is a masterpiece of precision and performance."
               </p>
-              <p className="text-primary font-semibold">Founder & CEO, Zently IT Solution</p>
+
+              <div className="flex flex-col items-center">
+                <div className="w-1.5 h-16 bg-gradient-to-b from-primary to-transparent mb-8 rounded-full" />
+                <h4 className="text-white font-black text-2xl tracking-widest uppercase">Founder & CEO</h4>
+                <p className="text-primary text-sm font-black uppercase tracking-[0.4em] mt-2 opacity-80">Zently IT Solution</p>
+              </div>
             </div>
           </SectionReveal>
         </div>
       </section>
 
-      {/* Capabilities */}
-      <section className="section-padding bg-card/30">
-        <div className="container mx-auto text-center">
+      {/* Enterprise Capabilities */}
+      <section className="section-padding bg-background relative">
+        <div className="container mx-auto">
           <SectionReveal>
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-6">
-              Enterprise <span className="gradient-text">Capabilities</span>
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto mb-12">
-              We bring the technical depth and strategic thinking needed to deliver complex enterprise solutions.
-            </p>
+            <div className="text-center mb-24">
+              <h2 className="font-display text-4xl md:text-6xl font-black mb-8 tracking-tight">
+                Enterprise <span className="gradient-text">Superiority</span>
+              </h2>
+              <div className="w-24 h-1.5 bg-primary/20 mx-auto rounded-full" />
+            </div>
           </SectionReveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
             {[
-              { icon: <Rocket size={24} />, title: "Rapid Delivery", desc: "Agile methodology with 2-week sprint cycles." },
-              { icon: <Target size={24} />, title: "Scalable Architecture", desc: "Microservices, cloud-native, and containerized." },
-              { icon: <Users size={24} />, title: "Dedicated Teams", desc: "Full-stack engineers assigned to your project." },
-              { icon: <Eye size={24} />, title: "24/7 Support", desc: "Round-the-clock monitoring and support." },
+              { icon: <Rocket size={32} />, title: "Agile Dominance", desc: "Our 2-week sprint architecture ensures your product evolves at the speed of thought, not just business.", color: "primary" },
+              { icon: <Target size={32} />, title: "Infrastructural Scale", desc: "We deploy future-proof microservices and cloud-native stacks built to handle millions of requests.", color: "accent" },
+              { icon: <Users size={32} />, title: "Elite Engineering", desc: "Full-stack specialists integrated directly into your long-term roadmap and product vision.", color: "primary" },
+              { icon: <Eye size={32} />, title: "Perpetual Support", desc: "24/7 proactive monitoring and incident management to ensure zero-downtime operations.", color: "accent" },
             ].map((cap, i) => (
               <SectionReveal key={cap.title} delay={i * 0.1}>
-                <div className="glass rounded-xl p-8 hover-lift">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4 mx-auto">
+                <div className="glass-strong rounded-[2.5rem] p-10 h-full hover-lift group border border-white/5 relative shadow-xl overflow-hidden">
+                  <div className={`w-20 h-20 rounded-3xl ${cap.color === 'primary' ? 'bg-primary/20 text-primary border-primary/30' : 'bg-accent/20 text-accent border-accent/30'} border flex items-center justify-center mb-10 group-hover:scale-110 transition-all duration-700 shadow-[0_0_20px_rgba(249,115,22,0.15)]`}>
                     {cap.icon}
                   </div>
-                  <h3 className="font-display font-semibold mb-2">{cap.title}</h3>
-                  <p className="text-sm text-muted-foreground">{cap.desc}</p>
+                  <h3 className="font-display text-2xl font-bold mb-5 text-white">{cap.title}</h3>
+                  <p className="text-base text-white/50 leading-relaxed font-light">{cap.desc}</p>
                 </div>
               </SectionReveal>
             ))}
@@ -157,18 +252,19 @@ const About = () => {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* Final CTA */}
       <section className="section-padding">
-        <div className="container mx-auto text-center">
+        <div className="container mx-auto text-center relative">
           <SectionReveal>
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-6">
-              Want to Work With Us?
+            <h2 className="font-display text-5xl md:text-7xl font-black mb-12 tracking-tighter">
+              Let's Build the <span className="gradient-text">Extraordinary.</span>
             </h2>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-10 py-4 rounded-lg bg-primary text-primary-foreground font-semibold text-lg hover:opacity-90 transition-all glow"
+              className="inline-flex items-center gap-4 px-14 py-6 rounded-[2rem] bg-primary text-primary-foreground font-black text-2xl hover:scale-105 transition-all glow-lg group shadow-2xl"
             >
-              Get in Touch <ArrowRight size={20} />
+              Collaborate Now
+              <ArrowRight size={28} className="group-hover:translate-x-2 transition-transform" />
             </Link>
           </SectionReveal>
         </div>

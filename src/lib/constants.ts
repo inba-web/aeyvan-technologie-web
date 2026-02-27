@@ -2,7 +2,8 @@
 export const COMPANY = {
   name: "Zently IT Solution",
   tagline: "Transforming Ideas into Scalable Digital Products",
-  location: "Coimbatore, India",
+  location1: "Bengaluru, India",
+  location2: "Coimbatore, India",
   phone: "+91 6385609932",
   email: "info.itsolution@gmail.com",
   whatsapp: "https://wa.me/916385609932?text=Hello%20Zently%20IT%20Solution%2C%20I%20would%20like%20to%20discuss%20my%20project.",

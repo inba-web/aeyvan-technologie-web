@@ -87,10 +87,19 @@
     @apply bg-clip-text text-transparent bg-gradient-to-r from-[hsl(var(--primary))] via-[hsl(var(--accent))] to-[hsl(var(--primary))];
     background-size: 200% auto;
     animation: textShine 4s linear infinite;
+    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.1));
   }
 
   @keyframes textShine {
-    to {
+    0% {
+      background-position: 0% center;
+    }
+
+    50% {
+      background-position: 100% center;
+    }
+
+    100% {
       background-position: 200% center;
     }
   }
@@ -103,7 +112,11 @@
   }
 
   .glow {
-    filter: drop-shadow(0 0 15px hsla(var(--primary), 0.3));
+    filter: drop-shadow(0 0 15px hsla(var(--primary), 0.25));
+  }
+
+  .logo-glow {
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 20px hsla(var(--primary), 0.3));
   }
 
   .glow-sm {
