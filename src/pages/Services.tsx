@@ -1,11 +1,23 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Globe, Palette, Smartphone, Shield, Cloud, CheckCircle } from "lucide-react";
+import {
+  ArrowRight,
+  Globe,
+  Palette,
+  Smartphone,
+  Shield,
+  Cloud,
+  CheckCircle,
+} from "lucide-react";
 import SectionReveal from "@/components/SectionReveal";
 import { SERVICES } from "@/lib/constants";
 
 const iconComponents: Record<string, any> = {
-  Globe, Palette, Smartphone, Shield, Cloud,
+  Globe,
+  Palette,
+  Smartphone,
+  Shield,
+  Cloud,
 };
 
 const Services = () => {
@@ -22,7 +34,10 @@ const Services = () => {
             playsInline
             className="w-full h-full object-cover scale-105"
           >
-            <source src="/mixkit-computer-hacker-logging-a-website-with-code-47321-hd-ready.mp4" type="video/mp4" />
+            <source
+              src="/mixkit-computer-hacker-logging-a-website-with-code-47321-hd-ready.mp4"
+              type="video/mp4"
+            />
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-background z-10" />
         </div>
@@ -51,7 +66,8 @@ const Services = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            We don't just build software; we architect the technological backbone of tomorrow's industry leaders.
+            We don't just build software; we architect the technological
+            backbone of tomorrow's industry leaders.
           </motion.p>
         </div>
 
@@ -66,7 +82,11 @@ const Services = () => {
             <motion.div
               className="w-1 h-2 bg-primary rounded-full"
               animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
             />
           </div>
         </motion.div>
@@ -81,21 +101,29 @@ const Services = () => {
 
             return (
               <SectionReveal key={service.id}>
-                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center ${!isEven ? "lg:direction-rtl" : ""}`}>
+                <div
+                  className={`grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center ${!isEven ? "lg:direction-rtl" : ""}`}
+                >
                   <div className={`${!isEven ? "lg:order-2" : ""} relative`}>
                     <div className="absolute -top-12 -left-12 w-24 h-24 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
 
                     <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-10 border border-primary/20 shadow-inner">
                       {Icon && <Icon size={40} />}
                     </div>
-                    <h2 className="font-display text-4xl md:text-6xl font-black mb-8 tracking-tight">{service.title}</h2>
-                    <p className="text-xl text-white/60 leading-relaxed mb-10 font-light">{service.description}</p>
+                    <h2 className="font-display text-4xl md:text-6xl font-black mb-8 tracking-tight">
+                      {service.title}
+                    </h2>
+                    <p className="text-xl text-white/60 leading-relaxed mb-10 font-light">
+                      {service.description}
+                    </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
                       {service.features.map((f) => (
                         <div key={f} className="flex items-center gap-4 group">
                           <div className="w-2 h-2 rounded-full bg-primary group-hover:scale-150 transition-transform" />
-                          <span className="text-white/80 font-medium tracking-wide">{f}</span>
+                          <span className="text-white/80 font-medium tracking-wide">
+                            {f}
+                          </span>
                         </div>
                       ))}
                     </div>
@@ -103,8 +131,12 @@ const Services = () => {
                     <div className="inline-flex items-center gap-4 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm mb-12">
                       <span className="text-3xl">🚀</span>
                       <div>
-                        <p className="text-xs text-primary font-bold uppercase tracking-widest mb-1">Business Impact</p>
-                        <p className="text-lg text-white font-medium">{service.impact}</p>
+                        <p className="text-xs text-primary font-bold uppercase tracking-widest mb-1">
+                          Business Impact
+                        </p>
+                        <p className="text-lg text-white font-medium">
+                          {service.impact}
+                        </p>
                       </div>
                     </div>
 
@@ -113,7 +145,11 @@ const Services = () => {
                         to="/contact"
                         className="inline-flex items-center gap-4 px-10 py-5 rounded-full bg-white text-black font-black text-lg hover:bg-primary hover:text-white transition-all duration-500 group"
                       >
-                        Initiate Project <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
+                        Initiate Project{" "}
+                        <ArrowRight
+                          size={20}
+                          className="group-hover:translate-x-2 transition-transform"
+                        />
                       </Link>
                     </div>
                   </div>
@@ -128,6 +164,10 @@ const Services = () => {
                         <img
                           src={service.image}
                           alt={service.title}
+                          loading="lazy"
+                          decoding="async"
+                          draggable={false}
+                          fetchPriority="low"
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
@@ -150,7 +190,8 @@ const Services = () => {
         <div className="container mx-auto text-center relative z-10 px-4">
           <SectionReveal>
             <h2 className="font-display text-5xl md:text-8xl font-black mb-10 tracking-tighter">
-              The Future is <span className="gradient-text">Optional.</span> <br />
+              The Future is <span className="gradient-text">Optional.</span>{" "}
+              <br />
               <span className="text-white">Growth is Irresistible.</span>
             </h2>
             <p className="text-white/50 max-w-2xl mx-auto mb-16 text-xl md:text-2xl font-light">
@@ -160,7 +201,11 @@ const Services = () => {
               to="/contact"
               className="inline-flex items-center gap-6 px-16 py-8 rounded-full bg-primary text-black font-black text-2xl hover:scale-105 transition-all glow-lg group shadow-2xl"
             >
-              Consult an Expert <ArrowRight size={32} className="group-hover:translate-x-2 transition-transform" />
+              Consult an Expert{" "}
+              <ArrowRight
+                size={32}
+                className="group-hover:translate-x-2 transition-transform"
+              />
             </Link>
           </SectionReveal>
         </div>
