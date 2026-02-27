@@ -131,7 +131,7 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex flex-col gap-1">
                 <span className="text-[10px] text-primary font-bold uppercase tracking-widest opacity-70">Email</span>
-                <a href={`mailto:${COMPANY.email}`} className="text-sm text-muted-foreground hover:text-foreground transition-colors">{COMPANY.email}</a>
+                <a href={`mailto:${COMPANY.email}`} className="text-sm text-muted-foreground hover:text-foreground transition-colors break-all">{COMPANY.email}</a>
               </li>
               <li className="flex flex-col gap-1">
                 <span className="text-[10px] text-primary font-bold uppercase tracking-widest opacity-70">Phone</span>
