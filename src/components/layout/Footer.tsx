@@ -55,8 +55,8 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="lg:col-span-1 space-y-8">
             <Link to="/" className="flex items-center group">
-              <img src="/favicon.png" alt="Zently Logo" className="w-[1.2em] h-[1.2em] object-contain logo-glow group-hover:scale-110 transition-all duration-500 mr-[-0.15em]" />
-              <h3 className="font-display text-2xl font-bold tracking-tight gradient-text">ently IT Solution</h3>
+              <img src="/favicon.png" alt="Zently Logo" className="w-[3.2em] h-[3.2em] object-contain logo-glow group-hover:scale-110 transition-all duration-500 -mb-2 mr-[-0.60em]" />
+              <h3 className="font-display text-2xl font-bold tracking-tight">ently IT Solution</h3>
             </Link>
 
             <div className="space-y-4">

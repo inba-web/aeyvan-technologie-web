@@ -8,7 +8,7 @@ const WhatsAppButton = () => {
       href={COMPANY.whatsapp}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-8 right-8 z-50 flex items-center gap-4 px-6 py-4 rounded-[2rem] bg-[#25D366] text-white shadow-[0_20px_50px_rgba(37,211,102,0.4)] border border-white/20 hover:shadow-[0_30px_60px_rgba(37,211,102,0.5)] transition-all group overflow-hidden"
+      className="fixed bottom-8 right-8 z-50 flex items-center gap-4 px-6 py-4 rounded-[2rem] bg-[#25D366] text-white shadow-[0_20px_50px_rgba(27,0,11,11)] border border-white/20 hover:shadow-[0_30px_60px_rgba(37,211,102,0.5)] transition-all group overflow-hidden"
       whileHover={{ y: -8, scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       initial={{ y: 50, opacity: 0 }}
