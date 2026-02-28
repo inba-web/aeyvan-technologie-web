@@ -1,7 +1,18 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Target, Eye, Rocket, ChevronLeft, ChevronRight, Zap, Layers, Bot, Globe } from "lucide-react";
+import {
+  ArrowRight,
+  Target,
+  Eye,
+  Rocket,
+  ChevronLeft,
+  ChevronRight,
+  Zap,
+  Layers,
+  Bot,
+  Globe,
+} from "lucide-react";
 import SectionReveal from "@/components/SectionReveal";
 import TiltedCard from "@/components/TiltedCard";
 import CardSwap, { Card } from "@/components/CardSwap";
@@ -9,7 +20,7 @@ import CardSwap, { Card } from "@/components/CardSwap";
 const ABOUT_IMAGES = [
   "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2000&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 ];
 
 const About = () => {
@@ -61,14 +72,20 @@ const About = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            From international freelancing to enterprise-grade solutions. We craft digital products that redefine industry standards.
+            From international freelancing to enterprise-grade solutions. We
+            craft digital products that redefine industry standards.
           </motion.p>
         </div>
 
         {/* Carousel Controls */}
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-30 flex items-center gap-6">
           <button
-            onClick={() => setCurrentImg((prev) => (prev - 1 + ABOUT_IMAGES.length) % ABOUT_IMAGES.length)}
+            onClick={() =>
+              setCurrentImg(
+                (prev) =>
+                  (prev - 1 + ABOUT_IMAGES.length) % ABOUT_IMAGES.length,
+              )
+            }
             className="p-3 rounded-full glass hover:bg-primary/20 transition-all text-white border border-white/10"
           >
             <ChevronLeft size={24} />
@@ -79,14 +96,19 @@ const About = () => {
               <button
                 key={i}
                 onClick={() => setCurrentImg(i)}
-                className={`h-1.5 transition-all duration-500 rounded-full ${i === currentImg ? "w-12 bg-primary shadow-[0_0_15px_rgba(249,115,22,0.5)]" : "w-3 bg-white/20 hover:bg-white/40"
-                  }`}
+                className={`h-1.5 transition-all duration-500 rounded-full ${
+                  i === currentImg
+                    ? "w-12 bg-primary shadow-[0_0_15px_rgba(249,115,22,0.5)]"
+                    : "w-3 bg-white/20 hover:bg-white/40"
+                }`}
               />
             ))}
           </div>
 
           <button
-            onClick={() => setCurrentImg((prev) => (prev + 1) % ABOUT_IMAGES.length)}
+            onClick={() =>
+              setCurrentImg((prev) => (prev + 1) % ABOUT_IMAGES.length)
+            }
             className="p-3 rounded-full glass hover:bg-primary/20 transition-all text-white border border-white/10"
           >
             <ChevronRight size={24} />
@@ -114,9 +136,13 @@ const About = () => {
                     <div className="w-14 h-14 rounded-2xl bg-primary/20 backdrop-blur-md flex items-center justify-center text-primary mb-6 border border-primary/30 shadow-xl">
                       <Eye size={32} />
                     </div>
-                    <h3 className="font-display text-4xl font-bold text-white mb-4">Our Vision</h3>
+                    <h3 className="font-display text-4xl font-bold text-white mb-4">
+                      Our Vision
+                    </h3>
                     <p className="text-white/80 text-lg leading-relaxed font-medium">
-                      To be the most trusted enterprise technology partner for businesses worldwide, driving digital transformation through innovative and scalable solutions.
+                      To be the most trusted enterprise technology partner for
+                      businesses worldwide, driving digital transformation
+                      through innovative and scalable solutions.
                     </p>
                   </div>
                 }
@@ -139,9 +165,13 @@ const About = () => {
                     <div className="w-14 h-14 rounded-2xl bg-accent/20 backdrop-blur-md flex items-center justify-center text-accent mb-6 border border-accent/30 shadow-xl">
                       <Target size={32} />
                     </div>
-                    <h3 className="font-display text-4xl font-bold text-white mb-4">Our Mission</h3>
+                    <h3 className="font-display text-4xl font-bold text-white mb-4">
+                      Our Mission
+                    </h3>
                     <p className="text-white/80 text-lg leading-relaxed font-medium">
-                      To engineer high-quality, production-ready digital products that solve real business challenges, enabling our clients to scale globally.
+                      To engineer high-quality, production-ready digital
+                      products that solve real business challenges, enabling our
+                      clients to scale globally.
                     </p>
                   </div>
                 }
@@ -160,9 +190,16 @@ const About = () => {
         <div className="container mx-auto px-4">
           <SectionReveal>
             <div className="text-center mb-24">
-              <span className="text-sm text-primary font-bold uppercase tracking-[0.4em] bg-primary/10 px-4 py-2 rounded-full">Our Journey</span>
-              <h2 className="font-display text-5xl md:text-7xl font-black mt-8 tracking-tight">The <span className="gradient-text">Evolution</span></h2>
-              <p className="text-white/50 mt-6 max-w-2xl mx-auto text-lg">From a small freelance collective to a global enterprise technology partner.</p>
+              <span className="text-sm text-primary font-bold uppercase tracking-[0.4em] bg-primary/10 px-4 py-2 rounded-full">
+                Our Journey
+              </span>
+              <h2 className="font-display text-5xl md:text-7xl font-black mt-8 tracking-tight">
+                The <span className="gradient-text">Evolution</span>
+              </h2>
+              <p className="text-white/50 mt-6 max-w-2xl mx-auto text-lg">
+                From a small freelance collective to a global enterprise
+                technology partner.
+              </p>
             </div>
           </SectionReveal>
 
@@ -181,10 +218,17 @@ const About = () => {
                   className="w-full md:w-[45%] order-2 md:order-1"
                 >
                   <div className="glass-strong p-8 md:p-10 rounded-[2.5rem] border border-white/5 hover:border-primary/40 transition-all duration-500 group">
-                    <div className="text-primary font-bold text-sm mb-4 tracking-widest uppercase">2021 - 2023</div>
-                    <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-primary transition-colors">Global Freelancing Era</h3>
+                    <div className="text-primary font-bold text-sm mb-4 tracking-widest uppercase">
+                      2021 - 2023
+                    </div>
+                    <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-primary transition-colors">
+                      Global Freelancing Era
+                    </h3>
                     <p className="text-white/60 text-lg leading-relaxed">
-                      We operated as an elite circle of international freelancers, delivering high-performance solutions for top-tier startups and business owners across the globe. Our foundation was built on diverse projects and consistent excellence.
+                      We started as a small group of skilled freelancers working
+                      with startups and business owners around the world. We
+                      focused on doing quality work across different projects
+                      and always giving our best.{" "}
                     </p>
                   </div>
                 </motion.div>
@@ -212,10 +256,17 @@ const About = () => {
                   className="w-full md:w-[45%]"
                 >
                   <div className="glass-strong p-8 md:p-10 rounded-[2.5rem] border border-white/5 hover:border-primary/40 transition-all duration-500 group">
-                    <div className="text-primary font-bold text-sm mb-4 tracking-widest uppercase">Early 2024</div>
-                    <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-primary transition-colors">Zently IT Solutions Born</h3>
+                    <div className="text-primary font-bold text-sm mb-4 tracking-widest uppercase">
+                      Early 2024
+                    </div>
+                    <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-primary transition-colors">
+                      Zently IT Solutions Born
+                    </h3>
                     <p className="text-white/60 text-lg leading-relaxed">
-                      Recognizing the power of our combined talent, we formalized our collective into a registered IT company. This marked our shift from individual contributors to a unified force of technology experts.
+                      As we saw how strong we were together, we officially
+                      started our own IT company. We moved from working
+                      individually to becoming one united team of tech
+                      experts.{" "}
                     </p>
                   </div>
                 </motion.div>
@@ -231,10 +282,17 @@ const About = () => {
                   className="w-full md:w-[45%] order-2 md:order-1"
                 >
                   <div className="glass-strong p-8 md:p-10 rounded-[2.5rem] border border-white/5 hover:border-primary/40 transition-all duration-500 group">
-                    <div className="text-primary font-bold text-sm mb-4 tracking-widest uppercase">Present & Future</div>
-                    <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-primary transition-colors">Scaling Enterprise</h3>
+                    <div className="text-primary font-bold text-sm mb-4 tracking-widest uppercase">
+                      Present & Future
+                    </div>
+                    <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-primary transition-colors">
+                      Scaling Enterprise
+                    </h3>
                     <p className="text-white/60 text-lg leading-relaxed">
-                      Today, we specialize in high-impact digital products, enterprise applications, and cutting-edge web platforms. We don't just build software; we architect the growth of modern businesses.
+                      Today, we build powerful digital products, business
+                      applications, and modern web platforms. We don’t just
+                      create software — we help businesses grow and succeed in
+                      the digital world.{" "}
                     </p>
                   </div>
                 </motion.div>
@@ -255,12 +313,15 @@ const About = () => {
         <div className="container mx-auto px-4">
           <SectionReveal>
             <div className="text-center mb-24">
-              <span className="text-sm text-primary font-bold uppercase tracking-[0.4em] bg-primary/10 px-4 py-2 rounded-full">Our Edge</span>
+              <span className="text-sm text-primary font-bold uppercase tracking-[0.4em] bg-primary/10 px-4 py-2 rounded-full">
+                Our Edge
+              </span>
               <h2 className="font-display text-5xl md:text-7xl font-black mt-8 tracking-tight">
                 Enterprise <span className="gradient-text">Superiority</span>
               </h2>
               <p className="text-white/50 mt-6 max-w-2xl mx-auto text-lg italic font-light">
-                Setting the benchmark for quality, speed, and innovation in the digital landscape.
+                Setting the benchmark for quality, speed, and innovation in the
+                digital landscape.
               </p>
             </div>
           </SectionReveal>
@@ -272,29 +333,29 @@ const About = () => {
                 icon: <Zap size={32} />,
                 desc: "Rapid delivery of complex digital products with zero compromise on quality. We ship faster than the competition.",
                 img: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop",
-                color: "from-orange-500/20"
+                color: "from-orange-500/20",
               },
               {
                 title: "Scalability",
                 icon: <Layers size={32} />,
                 desc: "Architectures designed to handle enterprise-level loads and global user bases without breaking a sweat.",
                 img: "https://stepwise.pl/wp-content/uploads/2021/06/Oprogramowanie-cloud-native-w-modelu-SaaS-www-2-980x588.jpg",
-                color: "from-blue-500/20"
+                color: "from-blue-500/20",
               },
               {
                 title: "Intelligence",
                 icon: <Bot size={32} />,
                 desc: "AI-driven solutions that automate and enhance business operations, providing a competitive technological edge.",
                 img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop",
-                color: "from-purple-500/20"
+                color: "from-purple-500/20",
               },
               {
                 title: "Resilience",
                 icon: <Globe size={32} />,
                 desc: "Robust, secure, and always-on infrastructures for critical systems, ensuring business continuity 24/7.",
                 img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1200&auto=format&fit=crop",
-                color: "from-green-500/20"
-              }
+                color: "from-green-500/20",
+              },
             ].map((feature, i) => (
               <SectionReveal key={i} delay={i * 0.1}>
                 <div className="group relative h-[500px] rounded-[2rem] overflow-hidden border border-white/5 hover:border-primary/30 transition-all duration-700 bg-card/20 backdrop-blur-sm">
@@ -305,7 +366,9 @@ const About = () => {
                       alt={feature.title}
                       className="w-full h-full object-cover opacity-20 grayscale group-hover:scale-110 group-hover:grayscale-0 group-hover:opacity-40 transition-all duration-700"
                     />
-                    <div className={`absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent`} />
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent`}
+                    />
                   </div>
 
                   {/* Content Container */}
@@ -314,7 +377,9 @@ const About = () => {
                       <div className="w-16 h-16 rounded-2xl bg-primary/20 backdrop-blur-md flex items-center justify-center text-primary mb-6 border border-primary/30 shadow-xl group-hover:bg-primary group-hover:text-black transition-all duration-500">
                         {feature.icon}
                       </div>
-                      <h3 className="font-display text-3xl font-bold text-white mb-4 tracking-tight uppercase leading-none">{feature.title}</h3>
+                      <h3 className="font-display text-3xl font-bold text-white mb-4 tracking-tight uppercase leading-none">
+                        {feature.title}
+                      </h3>
                       <p className="text-white/60 text-base leading-relaxed font-light opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                         {feature.desc}
                       </p>
@@ -336,14 +401,18 @@ const About = () => {
         <div className="container mx-auto text-center relative z-10">
           <SectionReveal>
             <h2 className="font-display text-5xl md:text-8xl font-black mb-12 tracking-tighter leading-none">
-              Ready to <span className="gradient-text">Dominate</span> the Digital Space?
+              Ready to <span className="gradient-text">Dominate</span> the
+              Digital Space?
             </h2>
             <Link
               to="/contact"
               className="inline-flex items-center gap-4 px-12 py-6 rounded-full bg-primary text-primary-foreground font-black text-xl md:text-2xl hover:scale-105 transition-all glow-lg group shadow-[0_0_50px_rgba(249,115,22,0.3)] hover:shadow-[0_0_80px_rgba(249,115,22,0.5)]"
             >
               Start Your Project
-              <ArrowRight size={28} className="group-hover:translate-x-2 transition-transform" />
+              <ArrowRight
+                size={28}
+                className="group-hover:translate-x-2 transition-transform"
+              />
             </Link>
           </SectionReveal>
         </div>
