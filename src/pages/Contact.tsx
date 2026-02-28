@@ -235,9 +235,9 @@ const Contact = () => {
                     <button
                       type="submit"
                       disabled={submitting}
-                      className="group relative w-full md:w-auto inline-flex items-center justify-center gap-4 px-12 py-6 rounded-2xl bg-primary text-black font-black text-xl hover:scale-[1.02] transition-all shadow-[0_20px_40px_rgba(249,115,22,0.3)] disabled:opacity-50 disabled:scale-100 overflow-hidden"
+                      className="group relative w-full md:w-auto inline-flex items-center justify-center gap-4 px-4 py-4 rounded-2xl bg-primary text-black font-black text-xl hover:scale-[1.02] transition-all shadow-[0_20px_40px_rgba(249,115,22,0.3)] disabled:opacity-50 disabled:scale-100 overflow-hidden"
                     >
-                      <span className="relative z-10">{submitting ? "Processing..." : "Submit Inquiry"}</span>
+                      <span className="relative text-sm font-bold z-10">{submitting ? "Processing..." : "Submit Inquiry"}</span>
                       <ArrowRight size={24} className={`relative z-10 transition-transform duration-300 ${submitting ? "translate-x-12 opacity-0" : "group-hover:translate-x-2"}`} />
                       <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
                     </button>
