@@ -32,11 +32,11 @@ const Index = () => {
   ];
 
   const posterImages = [
-    { src: "/zently posters/all packages.jpeg", title: "Comprehensive Solutions" },
+    { src: "/zently posters/starter.jpeg", title: "Starter Kit" },
     { src: "/zently posters/bronze package.jpeg", title: "Bronze Package" },
     { src: "/zently posters/poster.jpeg", title: "Event Poster" },
     { src: "/zently posters/silver package.jpeg", title: "Silver Package" },
-    { src: "/zently posters/starter.jpeg", title: "Starter Kit" },
+    { src: "/zently posters/all packages.jpeg", title: "Comprehensive Solutions" },
   ];
 
   const caseStudyImages = [
