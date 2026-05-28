@@ -28,8 +28,8 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between h-16 md:h-20 px-4">
         <Link to="/" className="flex items-center group">
           {/* Adjusted image size and margin to seamlessly act as the 'Z' for 'ently IT Solution' */}
-          <img src="/favicon.png" alt="Zently Logo" className="w-[3.2em] h-[3.2em] object-contain logo-glow group-hover:scale-110 transition-all duration-500 -mb-2 mr-[-0.80em]" />
-          <h3 className="font-display text-2xl font-bold tracking-tight ">ently IT Solution</h3>
+          <img src="public\aeyveruo.jpeg" alt="Zently Logo" className="h-[3.2em] w-full object-contain logo-glow group-hover:scale-110 transition-all duration-500 -mb-2 mr-[-0.80em]" />
+          <h3 className="font-display text-xl font-bold tracking-tight "><span className="text-primary">Aeyvan</span> Technologies</h3> 
         </Link>
 
         {/* Desktop Nav */}

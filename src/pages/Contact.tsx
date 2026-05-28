@@ -312,7 +312,7 @@ const Contact = () => {
                     style={{ border: 0 }}
                     allowFullScreen
                     loading="lazy"
-                    title="Zently IT Solution Location"
+                    title="Aeyvan Technologies Location"
                   />
                   <div className="absolute inset-0 bg-primary/5 pointer-events-none mix-blend-color" />
                 </div>

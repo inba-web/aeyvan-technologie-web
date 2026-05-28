@@ -76,7 +76,7 @@ const Index = () => {
             className="mb-6 flex items-center justify-center gap-3"
           >
             <span className="font-display text-xl md:text-2xl lg:text-3xl font-bold tracking-[0.2em] uppercase gradient-text">
-              Zently IT Solution
+              Aeyvan Technologies
             </span>
           </motion.div>
 

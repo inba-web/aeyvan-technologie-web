@@ -260,7 +260,7 @@ const About = () => {
                       Early 2024
                     </div>
                     <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-primary transition-colors">
-                      Zently IT Solutions Born
+                      Aeyvan Technologies Born
                     </h3>
                     <p className="text-white/60 text-lg leading-relaxed">
                       As we saw how strong we were together, we officially

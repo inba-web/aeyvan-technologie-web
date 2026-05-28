@@ -12,7 +12,7 @@ const TESTIMONIALS: Testimonial[] = [
     {
         name: "Rajesh Kumar",
         role: "CTO, TechVenture Inc",
-        text: "Zently transformed our legacy systems into a modern cloud platform. Their engineering quality is world-class.",
+        text: "Aeyvan transformed our legacy systems into a modern cloud platform. Their engineering quality is world-class.",
         image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&h=150&auto=format&fit=crop"
     },
     {
@@ -24,13 +24,13 @@ const TESTIMONIALS: Testimonial[] = [
     {
         name: "Michael Chen",
         role: "VP Engineering, GlobalRetail",
-        text: "Our e-commerce platform scaled from 100 to 25,000 users seamlessly. Zently's architecture is bulletproof.",
+        text: "Our e-commerce platform scaled from 100 to 25,000 users seamlessly. Aeyvan's architecture is bulletproof.",
         image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150&h=150&auto=format&fit=crop"
     },
     {
         name: "Sarah Jenkins",
         role: "Founder, BloomEd",
-        text: "Working with Zently was a game-changer for our EdTech startup. They understood our vision perfectly.",
+        text: "Working with Aeyvan was a game-changer for our EdTech startup. They understood our vision perfectly.",
         image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&h=150&auto=format&fit=crop"
     },
     {
