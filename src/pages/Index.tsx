@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Globe, Palette, Smartphone, Shield, Cloud, ChevronDown, X, Maximize2 } from "lucide-react";
-import AnimatedCounter from "@/components/AnimatedCounter";
 import { SERVICES, STATS, TECH_STACK, CASE_STUDIES } from "@/lib/constants";
 import SplitText from "@/components/SplitText";
 import Squares from "@/components/Squares";
