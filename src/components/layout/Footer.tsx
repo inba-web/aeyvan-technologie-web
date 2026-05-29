@@ -66,7 +66,7 @@ const Footer = () => {
           <div className="lg:col-span-1 space-y-8">
             <Link to="/" className="flex items-center group">
               <img
-                src="public\aeyveruo.jpeg"
+                src="\aeyveruo.jpeg"
                 alt="Aeyvan Logo"
                 className="w-[10.2em] h-[3.2em] flex object-contain logo-glow group-hover:scale-110 transition-all duration-500 -mb-2 mr-[-0.80em]"
               />
